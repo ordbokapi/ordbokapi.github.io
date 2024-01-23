@@ -169,7 +169,13 @@ class WordGraph extends HTMLElement {
       mouseX = event.clientX - rect.left;
       mouseY = event.clientY - rect.top;
 
+      let forceApplied = false;
+
       simulation.force('mouse', (alpha) => {
+        if (forceApplied) return;
+
+        forceApplied = true;
+
         nodes.forEach((node) => {
           const dx = node.x - mouseX;
           const dy = node.y - mouseY;
