@@ -8,6 +8,8 @@
 !graph-data.json
 !graph-data-provider.js
 !graph.js
+!site.webmanifest
+!favicon.ico
 !.prettierrc
 !.editorconfig
 !.vscode
