@@ -86,9 +86,35 @@
       </div>
     </section>
 
-    <section id="features" class="jumbotron text-on-right">
+    <section id="features" class="jumbotron">
       <div class="container">
-        <h2>Funksjonar</h2>
+        <div class="image-content">
+          Førespurnad:
+          <!-- prettier-ignore -->
+          <div class="code language-graphql">
+query ($word: String!, $dicts: [Dictionary!]) {
+  word(word: $word, dicts: $dictionaries) {
+    articles {
+      id
+      wordClass
+      definitions {
+        content {
+          textContent
+        }
+      }
+    }
+  }
+}
+          </div>
+          Variabler:
+          <!-- prettier-ignore -->
+          <div class="code language-json">
+{
+  "word": "forstå",
+  "dicts": ["Nynorskordboka"]
+}
+          </div>
+        </div>
         <div class="text-content">
           <p>
             Oppdag krafta i Ordbok API, eit verktøy designa for å forenkla
@@ -113,9 +139,39 @@
       </div>
     </section>
 
-    <section id="usage" class="jumbotron">
+    <section id="usage" class="jumbotron text-on-right">
       <div class="container">
-        <h2>Korleis bruka APIet</h2>
+        <div class="image-content">
+          Respons:
+          <!-- prettier-ignore -->
+          <div class="code language-json">
+{
+  "data": {
+    "word": {
+      "articles": [{
+        "id": 20953,
+        "wordClass": "Verb",
+        "definitions": [
+          {
+            "content": [
+              { "textContent": "skjøne, oppfatte, fatte" },
+              { "textContent": "kunne" }
+            ]
+          },
+          {
+            "content": [
+              { "textContent": "kunne setje seg inn i stoda til" },
+              { "textContent": "ha toleranse og sympati for" }
+            ]
+          }
+        ]
+      }]
+    }
+  }
+}
+          </div>
+          <script type="module" src="highlighting.js"></script>
+        </div>
         <div class="text-content">
           <p>
             Akkurat no er Ordbok API i ein utviklingsfase og kan vera ustabil.
