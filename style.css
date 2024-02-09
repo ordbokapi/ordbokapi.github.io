@@ -37,7 +37,7 @@ h4,
 h5,
 h6 {
   font-family: 'ScandiaWebBold', 'Sarala', sans-serif;
-  font-size: 4rem;
+  font-size: 3em;
   margin-bottom: 0.5rem;
 }
 
@@ -220,6 +220,33 @@ word-graph {
   background-color: #333;
   font-size: 1rem;
   padding: 2rem 0;
+}
+
+.jumbotron .text-content.full-width {
+  max-width: 100%;
+  display: block !important;
+}
+
+.jumbotron .text-content.smaller {
+  font-size: 1.25rem;
+}
+
+.jumbotron .text-content.smaller h1,
+.jumbotron .text-content.smaller h2,
+.jumbotron .text-content.smaller h3,
+.jumbotron .text-content.smaller h4,
+.jumbotron .text-content.smaller h5,
+.jumbotron .text-content.smaller h6 {
+  font-size: 2.5rem;
+}
+
+ol li {
+  margin-bottom: 1rem;
+}
+
+ol li > strong:first-child {
+  display: block;
+  margin-bottom: -1rem;
 }
 
 @media (max-width: 1199px) {
