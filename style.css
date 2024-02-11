@@ -244,7 +244,7 @@ ol li {
   margin-bottom: 1rem;
 }
 
-ol li > strong:first-child {
+ol li > strong:first-child:has(~ br) {
   display: block;
   margin-bottom: -1rem;
 }
