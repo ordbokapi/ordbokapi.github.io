@@ -46,6 +46,7 @@
     <meta property="og:locale" content="nn_NO" />
     <meta property="og:locale:alternate" content="nb_NO" />
     <link rel="stylesheet" href="style.css" />
+    <script src="nav-menu.js"></script>
   </head>
 
   <body>
@@ -54,10 +55,18 @@
         <a href="/" class="navbar-logo">
           <img src="images/ordbokapi-logo.png" alt="Ordbok API Logo" />
         </a>
-        <a href="https://vis.ordbokapi.org">Vis-klient</a>
-        <a href="https://github.com/ordbokapi/api">GitHub-prosjekt</a>
-        <a href="https://api.ordbokapi.org/graphql">Apollo Sandbox</a>
-        <a href="/personvern.html">Personvern</a>
+        <div class="navbar-spacer"></div>
+        <div class="hamburger-container">
+          <a class="hamburger" aria-label="Toggle menu">☰</a>
+        </div>
+        <div class="navbar-break"></div>
+        <div class="navbar-links" data-shown="false">
+          <a href="https://vis.ordbokapi.org">Vis-klient</a>
+          <a href="https://github.com/ordbokapi/api">GitHub</a>
+          <a href="https://api.ordbokapi.org/graphql">Apollo Sandbox</a>
+          <a href="https://blog.ordbokapi.org/">Blogg</a>
+          <a href="/personvern.html">Personvern</a>
+        </div>
       </div>
     </nav>
 

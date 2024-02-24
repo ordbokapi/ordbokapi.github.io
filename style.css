@@ -54,8 +54,8 @@ h6 {
   max-width: 1200px;
   margin: auto;
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  transition: max-height 0.3s ease-in-out;
 }
 
 .navbar-logo img {
@@ -293,6 +293,10 @@ footer {
   text-align: center;
 }
 
+.buttons {
+  line-height: 2;
+}
+
 a {
   color: var(--link-color);
   text-decoration: none;
@@ -342,6 +346,94 @@ a.btn.btn-primary:active {
 strong {
   font-weight: bold;
   color: var(--main-text-emphasis-color);
+}
+
+.navbar-links {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.hamburger-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-spacer {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.navbar-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.hamburger:hover {
+  color: var(--link-hover-color);
+}
+
+.hamburger:active {
+  color: var(--link-color);
+}
+
+.hamburger:active::before {
+  content: '';
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+}
+
+@media (min-width: 768px) {
+  .hamburger,
+  .navbar-spacer,
+  .navbar-break {
+    display: none;
+  }
+
+  .navbar-links {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2em;
+  }
+}
+
+@media (max-width: 767px) {
+  #navbar .container {
+    flex-wrap: wrap;
+    max-height: 84px;
+    overflow-y: hidden;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-spacer,
+  .navbar-break {
+    display: block;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    order: 1;
+    width: 100vw;
+  }
+
+  .navbar-links a:last-child {
+    margin-bottom: 2em;
+  }
 }
 
 @media (max-width: 1199px) {
