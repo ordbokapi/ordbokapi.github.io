@@ -2,8 +2,8 @@ export class GraphDataProvider {
   getRandomData() {
     const articleParameters = [
       { articleId: 100431, dictionary: 'Nynorskordboka', depth: 2 },
-      { articleId: 68019, dictionary: 'Nynorskordboka', depth: 3 },
-      { articleId: 68722, dictionary: 'Nynorskordboka', depth: 3 },
+      { articleId: 44132, dictionary: 'Nynorskordboka', depth: 1 },
+      { articleId: 38531, dictionary: 'Nynorskordboka', depth: 2 },
       { articleId: 18652, dictionary: 'Bokmaalsordboka', depth: 3 },
     ];
     const randomIndex = Math.floor(Math.random() * articleParameters.length);
