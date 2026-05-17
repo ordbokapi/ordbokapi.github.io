@@ -1,6 +1,9 @@
-<!--
-SPDX-FileCopyrightText: Copyright (C) 2023 Adaline Simonian
-SPDX-License-Identifier: AGPL-3.0-or-later
+{% for copyright_line in copyright_lines %}
+{{ copyright_line }}
+{% endfor %}
+{% for expression in spdx_expressions %}
+SPDX-License-Identifier: {{ expression }}
+{% endfor %}
 
 This file is part of Ordbok API.
 
@@ -16,10 +19,3 @@ details.
 
 You should have received a copy of the GNU Affero General Public License
 along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
--->
-
-# Ordbok API Prosjektnettside
-
-## Lisens
-
-[AGPL-3.0-or-later](COPYING)

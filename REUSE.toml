@@ -1,0 +1,15 @@
+version = 1
+
+[[annotations]]
+path = [
+  ".prettierrc",
+  ".vscode/**",
+  "CNAME",
+  "favicon.ico",
+  "graph-data.json",
+  "images/**",
+  "renovate.json",
+  "site.webmanifest",
+]
+SPDX-FileCopyrightText = "Copyright (C) 2023 Adaline Simonian"
+SPDX-License-Identifier = "AGPL-3.0-or-later"

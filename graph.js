@@ -1,5 +1,23 @@
-import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7/+esm';
-import { GraphDataProvider } from './graph-data-provider.js';
+// SPDX-FileCopyrightText: Copyright (C) 2023 Adaline Simonian
+// SPDX-License-Identifier: AGPL-3.0-or-later
+//
+// This file is part of Ordbok API.
+//
+// Ordbok API is free software: you can redistribute it and/or modify it under
+// the terms of the GNU Affero General Public License as published by the Free
+// Software Foundation, either version 3 of the License, or (at your option) any
+// later version.
+//
+// Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+// WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+// A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+// details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+import { GraphDataProvider } from "./graph-data-provider.js";
 
 /**
  * @typedef {{x: number, y: number, width: number, height: number}} BoundingBox
@@ -14,7 +32,7 @@ class WordGraph extends HTMLElement {
    */
   constructor() {
     super();
-    this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow = this.attachShadow({ mode: "open" });
   }
 
   /**
@@ -45,9 +63,9 @@ class WordGraph extends HTMLElement {
    * Initializes the canvas element and sets up the drawing context.
    */
   initializeCanvas() {
-    this.canvas = document.createElement('canvas');
+    this.canvas = document.createElement("canvas");
     this.shadow.appendChild(this.canvas);
-    this.context = this.canvas.getContext('2d');
+    this.context = this.canvas.getContext("2d");
     this.updateCanvasSize();
   }
 
@@ -84,10 +102,10 @@ class WordGraph extends HTMLElement {
     if (this.simulation) {
       this.simulation
         .force(
-          'center',
-          d3.forceCenter(this.canvas.width / 2, this.canvas.height / 2)
+          "center",
+          d3.forceCenter(this.canvas.width / 2, this.canvas.height / 2),
         )
-        .force('charge', d3.forceManyBody().strength(this.getChargeStrength()));
+        .force("charge", d3.forceManyBody().strength(this.getChargeStrength()));
     }
   }
 
@@ -142,17 +160,17 @@ class WordGraph extends HTMLElement {
     return d3
       .forceSimulation(nodes)
       .force(
-        'link',
+        "link",
         d3
           .forceLink(links)
           .id((node) => node.id)
-          .strength(0.05)
+          .strength(0.05),
       )
-      .force('charge', d3.forceManyBody().strength(this.getChargeStrength()))
-      .force('collision', d3.forceCollide().radius(20))
+      .force("charge", d3.forceManyBody().strength(this.getChargeStrength()))
+      .force("collision", d3.forceCollide().radius(20))
       .force(
-        'center',
-        d3.forceCenter(this.canvas.width / 2, this.canvas.height / 2)
+        "center",
+        d3.forceCenter(this.canvas.width / 2, this.canvas.height / 2),
       )
       .alphaTarget(0.5);
   }
@@ -164,14 +182,14 @@ class WordGraph extends HTMLElement {
    */
   addMouseInteraction(simulation, nodes) {
     let mouseX, mouseY;
-    this.canvas.addEventListener('mousemove', (event) => {
+    this.canvas.addEventListener("mousemove", (event) => {
       const rect = this.canvas.getBoundingClientRect();
       mouseX = event.clientX - rect.left;
       mouseY = event.clientY - rect.top;
 
       let forceApplied = false;
 
-      simulation.force('mouse', (alpha) => {
+      simulation.force("mouse", (alpha) => {
         if (forceApplied) return;
 
         forceApplied = true;
@@ -198,12 +216,12 @@ class WordGraph extends HTMLElement {
    * @param {Link[]} links The array of links.
    */
   handleSimulationUpdates(simulation, nodes, links) {
-    simulation.on('tick', () => {
+    simulation.on("tick", () => {
       this.updateNodePositions(nodes);
       this.drawGraph(nodes, links);
     });
 
-    window.addEventListener('unload', () => simulation.stop());
+    window.addEventListener("unload", () => simulation.stop());
   }
 
   /**
@@ -218,11 +236,11 @@ class WordGraph extends HTMLElement {
 
       node.x = Math.max(
         node.bbox.width / 2,
-        Math.min(width - node.bbox.width / 2, node.x)
+        Math.min(width - node.bbox.width / 2, node.x),
       );
       node.y = Math.max(
         node.bbox.height / 2,
-        Math.min(height - node.bbox.height / 2, node.y)
+        Math.min(height - node.bbox.height / 2, node.y),
       );
     });
   }
@@ -253,7 +271,7 @@ class WordGraph extends HTMLElement {
     const ctx = this.context;
     ctx.save();
     ctx.globalAlpha = 0.6;
-    ctx.strokeStyle = '#00ffff';
+    ctx.strokeStyle = "#00ffff";
     ctx.beginPath();
     links.forEach((link) => {
       ctx.moveTo(link.source.x, link.source.y);
@@ -271,8 +289,8 @@ class WordGraph extends HTMLElement {
     const ctx = this.context;
     ctx.save();
     ctx.font = `${this.getFontSize()}px Lora`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
 
     nodes.forEach((node) => {
       this.drawNode(ctx, node);
@@ -308,18 +326,18 @@ class WordGraph extends HTMLElement {
       };
     }
 
-    ctx.fillStyle = '#1b1b1b';
+    ctx.fillStyle = "#1b1b1b";
     this.drawRoundedRect(
       ctx,
       rectX,
       rectY,
       rectWidth,
       rectHeight,
-      borderRadius
+      borderRadius,
     );
     ctx.fill();
 
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = "#fff";
     ctx.fillText(node.text, node.x, node.y);
   }
 
@@ -354,4 +372,4 @@ class WordGraph extends HTMLElement {
 }
 
 // Register the custom element so that it can be used in HTML.
-customElements.define('word-graph', WordGraph);
+customElements.define("word-graph", WordGraph);
