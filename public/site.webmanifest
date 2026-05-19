@@ -1,6 +1,7 @@
 {
   "name": "Ordbok API",
-  "short_name": "Ordbok API",
+  "short_name": "OrdbokAPI",
+  "description": "Gratis og ope GraphQL API for norske ordbøker",
   "icons": [
     {
       "src": "/images/android-chrome-192x192.png",
@@ -14,6 +15,7 @@
     }
   ],
   "theme_color": "#0593ac",
-  "background_color": "#1b1b1b",
-  "display": "standalone"
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
 }

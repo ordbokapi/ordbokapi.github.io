@@ -1,0 +1,308 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+@font-face {
+  font-family: "ScandiaWebBold";
+  src:
+    url("/fonts/ScandiaWebBold.woff2") format("woff2"),
+    url("/fonts/ScandiaWebBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-primary-50: #e6f7fa;
+  --color-primary-100: #b3e8f0;
+  --color-primary-200: #80d9e6;
+  --color-primary-300: #4dcadc;
+  --color-primary-400: #26bdd5;
+  --color-primary-500: #0593ac;
+  --color-primary-600: #047a90;
+  --color-primary-700: #036274;
+  --color-primary-800: #024a58;
+  --color-primary-900: #01323c;
+
+  --color-accent-300: #fde29f;
+  --color-accent-400: #f7ca4f;
+  --color-accent-500: #d4a017;
+  --color-accent-600: #b8860b;
+
+  --font-heading: "ScandiaWebBold", "Sarala", sans-serif;
+  --font-body: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Menlo", "Consolas", monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --max-width: 1120px;
+  --nav-height: 64px;
+
+  /* Light mode */
+  --bg: #ffffff;
+  --bg-surface: #f0f9fb;
+  --bg-surface-alt: #e6f2f5;
+  --bg-code: #f3f6f8;
+  --text: #1a2730;
+  --text-muted: #4a6670;
+  --text-on-primary: #ffffff;
+  --primary: var(--color-primary-500);
+  --primary-hover: var(--color-primary-600);
+  --primary-soft: var(--color-primary-50);
+  --accent: var(--color-accent-500);
+  --link: var(--color-primary-600);
+  --link-hover: var(--color-primary-700);
+  --border: #d0dfe4;
+  --border-subtle: #e4ecef;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: var(--border-subtle);
+  --code-keyword: #0550ae;
+  --code-string: #0a3069;
+  --code-attr: #6639ba;
+  --code-comment: #6e7781;
+  --code-punctuation: #24292f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1419;
+    --bg-surface: #1a2730;
+    --bg-surface-alt: #1f3040;
+    --bg-code: #111c24;
+    --text: #e8edef;
+    --text-muted: #8ea3ad;
+    --text-on-primary: #ffffff;
+    --primary: var(--color-primary-300);
+    --primary-hover: var(--color-primary-200);
+    --primary-soft: var(--color-primary-900);
+    --accent: var(--color-accent-400);
+    --link: var(--color-primary-300);
+    --link-hover: var(--color-primary-200);
+    --border: #2a3f4a;
+    --border-subtle: #1f3040;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+    --nav-bg: rgba(15, 20, 25, 0.85);
+    --nav-border: var(--border);
+    --code-keyword: #79c0ff;
+    --code-string: #a5d6ff;
+    --code-attr: #d2a8ff;
+    --code-comment: #8b949e;
+    --code-punctuation: #c9d1d9;
+  }
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"]:not(:root) {
+  --bg: #0f1419;
+  --bg-surface: #1a2730;
+  --bg-surface-alt: #1f3040;
+  --bg-code: #111c24;
+  --text: #e8edef;
+  --text-muted: #8ea3ad;
+  --text-on-primary: #ffffff;
+  --primary: var(--color-primary-300);
+  --primary-hover: var(--color-primary-200);
+  --primary-soft: var(--color-primary-900);
+  --accent: var(--color-accent-400);
+  --link: var(--color-primary-300);
+  --link-hover: var(--color-primary-200);
+  --border: #2a3f4a;
+  --border-subtle: #1f3040;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --nav-bg: rgba(15, 20, 25, 0.85);
+  --nav-border: var(--border);
+  --code-keyword: #79c0ff;
+  --code-string: #a5d6ff;
+  --code-attr: #d2a8ff;
+  --code-comment: #8b949e;
+  --code-punctuation: #c9d1d9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+}
+h3 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--primary);
+  color: var(--text-on-primary);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--text-on-primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  color: var(--text-on-primary);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-surface-alt);
+  color: var(--text);
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}

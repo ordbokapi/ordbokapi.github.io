@@ -1,0 +1,98 @@
+query LookUp($word: String!) {
+  suggestions(word: $word) {
+    exact {
+      word
+      articles {
+        id
+        dictionary
+        wordClass
+        gender
+        flatDefinitions {
+          parentIndex
+          content {
+            textContent
+            richContent {
+              ... on RichContentTextSegment {
+                type
+                content
+              }
+              ... on RichContentArticleSegment {
+                type
+                content
+                article {
+                  id
+                  dictionary
+                }
+              }
+              ... on RichContentFormattedTextSegment {
+                type
+                content
+                formatted
+              }
+              ... on RichContentBibliographySegment {
+                type
+                content
+                reference {
+                  code
+                  author
+                  title
+                  year
+                  spec {
+                    textContent
+                  }
+                }
+              }
+              ... on RichContentPlaceSegment {
+                type
+                content
+                place {
+                  id
+                  name
+                  code
+                  type
+                }
+              }
+            }
+          }
+          examples {
+            textContent
+            richContent {
+              ... on RichContentTextSegment {
+                type
+                content
+              }
+              ... on RichContentFormattedTextSegment {
+                type
+                content
+                formatted
+              }
+              ... on RichContentBibliographySegment {
+                type
+                content
+                reference {
+                  code
+                  author
+                  title
+                  year
+                  spec {
+                    textContent
+                  }
+                }
+              }
+              ... on RichContentPlaceSegment {
+                type
+                content
+                place {
+                  id
+                  name
+                  code
+                  type
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

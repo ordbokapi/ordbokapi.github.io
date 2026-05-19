@@ -1,0 +1,401 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.section {
+  padding: 40px 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 32px;
+  align-items: start;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.showcase:last-child {
+  border-bottom: none;
+}
+
+.showcase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.showcase.fromRight .queryCol {
+  order: 2;
+}
+
+.showcase.fromRight .resultCol {
+  order: 1;
+}
+
+.question {
+  grid-column: 1 / -1;
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+.queryCol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.resultCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.tryLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 12px;
+}
+
+.tryLink:hover {
+  color: var(--primary-hover);
+}
+
+.fullData {
+  grid-column: 1 / -1;
+  order: 99;
+  margin-top: 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  min-width: 0;
+}
+
+.fullDataSummary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+
+.fullDataSummary::-webkit-details-marker {
+  display: none;
+}
+
+.detailsIconCollapsed {
+  display: inline-block;
+}
+
+.detailsIconExpanded {
+  display: none;
+}
+
+.fullData[open] .detailsIconCollapsed {
+  display: none;
+}
+
+.fullData[open] .detailsIconExpanded {
+  display: inline-block;
+}
+
+.fullDataSummary:hover {
+  color: var(--text);
+}
+
+.fullDataSummary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.fullDataContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px 16px;
+  min-width: 0;
+}
+
+.fullDataContent :global(pre),
+.fullDataContent :global(pre.shiki) {
+  max-height: 40vh;
+  overflow: auto;
+}
+
+@media (max-width: 900px) {
+  .showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase.fromRight .queryCol {
+    order: 0;
+  }
+
+  .showcase.fromRight .resultCol {
+    order: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .resultCol [role="listitem"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.resultCol [role="listitem"] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.resultCol.revealed [role="listitem"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.resultCol.revealed [role="listitem"]:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(2) {
+  transition-delay: 0.14s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(3) {
+  transition-delay: 0.18s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(4) {
+  transition-delay: 0.22s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(5) {
+  transition-delay: 0.26s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(6) {
+  transition-delay: 0.3s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(7) {
+  transition-delay: 0.34s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(8) {
+  transition-delay: 0.38s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(9) {
+  transition-delay: 0.42s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(10) {
+  transition-delay: 0.46s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(11) {
+  transition-delay: 0.5s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(12) {
+  transition-delay: 0.54s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(13) {
+  transition-delay: 0.58s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(14) {
+  transition-delay: 0.62s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(15) {
+  transition-delay: 0.66s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(16) {
+  transition-delay: 0.7s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(17) {
+  transition-delay: 0.74s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(18) {
+  transition-delay: 0.78s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(19) {
+  transition-delay: 0.82s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(20) {
+  transition-delay: 0.86s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(21) {
+  transition-delay: 0.9s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(22) {
+  transition-delay: 0.94s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(23) {
+  transition-delay: 0.98s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(24) {
+  transition-delay: 1.02s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(25) {
+  transition-delay: 1.06s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(26) {
+  transition-delay: 1.1s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(27) {
+  transition-delay: 1.14s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(28) {
+  transition-delay: 1.18s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(29) {
+  transition-delay: 1.22s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(30) {
+  transition-delay: 1.26s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(31) {
+  transition-delay: 1.3s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(32) {
+  transition-delay: 1.34s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(33) {
+  transition-delay: 1.38s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(34) {
+  transition-delay: 1.42s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(35) {
+  transition-delay: 1.46s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(36) {
+  transition-delay: 1.5s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(37) {
+  transition-delay: 1.54s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(38) {
+  transition-delay: 1.58s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(39) {
+  transition-delay: 1.62s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(40) {
+  transition-delay: 1.66s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(41) {
+  transition-delay: 1.7s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(42) {
+  transition-delay: 1.74s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(43) {
+  transition-delay: 1.78s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(44) {
+  transition-delay: 1.82s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(45) {
+  transition-delay: 1.86s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(46) {
+  transition-delay: 1.9s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(47) {
+  transition-delay: 1.94s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(48) {
+  transition-delay: 1.98s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(49) {
+  transition-delay: 2.02s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(50) {
+  transition-delay: 2.06s;
+}
+.resultCol.revealed [role="listitem"]:nth-child(n + 51) {
+  transition-delay: 2.1s;
+}
+
+.tabbedCode {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabBar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: -1px;
+}
+
+.tab {
+  all: unset;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.tabActive {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.tabbedCode :global(pre),
+.tabbedCode :global(pre.shiki) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.tabPanelHidden {
+  display: none;
+}

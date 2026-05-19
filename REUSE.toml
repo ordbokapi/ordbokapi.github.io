@@ -2,14 +2,35 @@ version = 1
 
 [[annotations]]
 path = [
+  ".gitattributes",
   ".prettierrc",
   ".vscode/**",
-  "CNAME",
-  "favicon.ico",
-  "graph-data.json",
-  "images/**",
+  ".yarn/**",
+  "public/CNAME",
+  "public/images/**",
+  "public/robots.txt",
+  "public/site.webmanifest",
   "renovate.json",
-  "site.webmanifest",
+  "package.json",
+  "tsconfig.json",
+  "yarn.lock",
+  "src/data/**",
+  "src/lib/graphql/**",
+  "src/lib/generated/**",
 ]
 SPDX-FileCopyrightText = "Copyright (C) 2023 Adaline Simonian"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+[[annotations]]
+path = ".yarn/**"
+SPDX-FileCopyrightText = "Copyright (c) Yarn Contributors"
+SPDX-License-Identifier = "BSD-2-Clause"
+
+[[annotations]]
+path = [
+  "public/images/hero-loop.mp4",
+  "public/images/hero-loop.webm",
+  "public/images/hero-poster.jpg",
+]
+SPDX-FileCopyrightText = "Copyright (c) Yan Krukau, Mikhail Nilov, Thirdman, Joachim Hoholm"
+SPDX-License-Identifier = "LicenseRef-Pexels-May-2026"

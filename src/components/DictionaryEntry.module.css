@@ -1,0 +1,376 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.stack {
+  max-width: 480px;
+}
+
+.deck {
+  display: grid;
+  margin-bottom: 14px;
+}
+
+.card {
+  grid-area: 1 / 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  max-height: 360px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  z-index: 4;
+  pointer-events: auto;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.cardHeader {
+  flex-shrink: 0;
+}
+
+.cardBody {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.shell {
+  grid-area: 1 / 1;
+  align-self: stretch;
+  height: 360px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shellFront {
+  z-index: 3;
+  transform: translateY(0) scaleX(1);
+  opacity: 1;
+  filter: brightness(1);
+}
+
+.shellBehind1 {
+  z-index: 2;
+  transform: translateY(6px) scaleX(0.97);
+  opacity: 1;
+  filter: brightness(0.97);
+}
+
+.shellBehind2 {
+  z-index: 1;
+  transform: translateY(12px) scaleX(0.94);
+  opacity: 1;
+  filter: brightness(0.94);
+}
+
+.shellHidden {
+  z-index: 0;
+  transform: translateY(12px) scaleX(0.94);
+  opacity: 0;
+  filter: brightness(0.94);
+}
+
+.cardExit {
+  animation: cardExit 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+.cardExitBack {
+  animation: cardExitBack 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+.cardHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cardEnter {
+  animation: cardEnter 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardExit {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+}
+
+@keyframes cardExitBack {
+  from {
+    transform: translateY(0) scaleX(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  to {
+    transform: translateY(6px) scaleX(0.97);
+    opacity: 0;
+    filter: brightness(0.97);
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  background: var(--bg-surface);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+  line-height: 1;
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.navBtn:hover:not(:disabled) {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+}
+
+.navBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-subtle);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dot:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.dot:hover {
+  border-color: var(--text-muted);
+}
+
+.dotActive {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.headword {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  margin-bottom: 2px;
+}
+
+.meta {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.defList {
+  list-style: none;
+  counter-reset: def;
+}
+
+.defItem {
+  counter-increment: def;
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.defItem::before {
+  content: counter(def) ".";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.defText {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.example {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.88rem;
+  margin-top: 4px;
+}
+
+.example::before {
+  content: "«";
+}
+
+.example::after {
+  content: "»";
+}
+
+.moreIndicator {
+  padding-left: 28px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.subDefList {
+  list-style: none;
+  counter-reset: subdef;
+  margin-top: 6px;
+  padding-left: 0;
+}
+
+.subDefItem {
+  counter-increment: subdef;
+  padding-left: 24px;
+  position: relative;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.subDefItem::before {
+  content: counter(def) "." counter(subdef);
+  position: absolute;
+  left: 0;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.citeWrap {
+  position: relative;
+  display: inline;
+}
+
+.citeLink {
+  all: unset;
+  color: var(--primary);
+  font-size: 0.75em;
+  cursor: help;
+  padding: 0 1px;
+  border-radius: 2px;
+  vertical-align: super;
+  line-height: 1;
+}
+
+.citeLink:hover,
+.citeLink:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.citeTooltip {
+  margin: 0;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  font-style: normal;
+  white-space: normal;
+  max-width: min(320px, 90vw);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  pointer-events: none;
+}
+
+.citeTooltip::backdrop {
+  background: transparent;
+}
+
+.citationList {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.citationList ol {
+  list-style: decimal;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.citationItem {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

@@ -16,15 +16,4 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
-node_modules
-dist
-src/lib/generated
-.env*
-*.tsbuildinfo
+.yarn/**

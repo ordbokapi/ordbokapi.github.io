@@ -23,17 +23,38 @@ along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ordbok API</title>
+    <title>Ordbok API | Tre norske ordbøker. Eitt API.</title>
     <meta
       name="description"
-      content="Nøkkelen din til enklare og meir tilgjengeleg tilgang til Ordbøkene-data."
-    />
-    <meta
-      name="keywords"
-      content="Ordbok API, ordbok, API, norsk, ordbøker, tilgang, informasjon"
+      content="Gratis og ope GraphQL API for Bokmålsordboka, Nynorskordboka og Norsk Ordbok. Utforsk, bygg med og forsk på det norske språket."
     />
     <meta name="author" content="Adaline Simonian" />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0593ac" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Ordbok API | Tre norske ordbøker. Eitt API."
+    />
+    <meta property="og:site_name" content="Ordbok API" />
+    <meta
+      property="og:description"
+      content="Gratis og ope GraphQL API for Bokmålsordboka, Nynorskordboka og Norsk Ordbok."
+    />
+    <meta
+      property="og:image"
+      content="https://ordbokapi.org/images/ordbokapi-open-graph.png"
+    />
+    <meta property="og:image:alt" content="Ordbok API" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="nn_NO" />
+    <meta property="og:locale:alternate" content="nb_NO" />
+    <meta property="og:url" content="https://ordbokapi.org/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://ordbokapi.org/" />
+
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -52,279 +73,28 @@ along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
       href="/images/favicon-16x16.png"
     />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ordbok API" />
-    <meta property="og:site_name" content="Ordbok API" />
-    <meta
-      property="og:description"
-      content="Nøkkelen din til enklare og meir tilgjengeleg tilgang til Ordbøkene-data."
-    />
-    <meta
-      property="og:image"
-      content="https://ordbokapi.org/images/ordbokapi-open-graph.png"
-    />
-    <meta property="og:image:alt" content="Ordbok API Logo" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="nn_NO" />
-    <meta property="og:locale:alternate" content="nb_NO" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="nav-menu.js"></script>
-  </head>
 
-  <body>
-    <nav id="navbar">
-      <div class="container">
-        <a href="#welcome" class="navbar-logo">
-          <img src="images/ordbokapi-logo.png" alt="Ordbok API Logo" />
-        </a>
-        <div class="navbar-spacer"></div>
-        <div class="hamburger-container">
-          <a class="hamburger" aria-label="Toggle menu">☰</a>
-        </div>
-        <div class="navbar-break"></div>
-        <div class="navbar-links" data-shown="false">
-          <a href="https://vis.ordbokapi.org">Vis-klient</a>
-          <a href="https://github.com/ordbokapi/api">GitHub</a>
-          <a href="https://api.ordbokapi.org/graphql">Apollo Sandbox</a>
-          <a href="https://blog.ordbokapi.org/">Blogg</a>
-          <a href="https://status.ordbokapi.org/">Status</a>
-          <a href="/personvern.html">Personvern</a>
-        </div>
-      </div>
-    </nav>
-
-    <section id="welcome" class="jumbotron">
-      <div class="container">
-        <div class="text-content">
-          <h1>Ordbok API</h1>
-          <p>
-            Nøkkelen din til enklare og meir tilgjengeleg tilgang til
-            Ordbøkene-data.
-          </p>
-          <div class="buttons">
-            <a href="https://api.ordbokapi.org/graphql" class="btn btn-primary"
-              >Prøv det no</a
-            >
-            <a href="https://vis.ordbokapi.org" class="btn">Vis-klient</a>
-            <a href="https://github.com/ordbokapi/api" class="btn">GitHub</a>
-            <a href="https://blog.ordbokapi.org/" class="btn">Blogg</a>
-          </div>
-        </div>
-        <div class="image-content">
-          <script type="module" src="graph.js"></script>
-          <word-graph></word-graph>
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="jumbotron">
-      <div class="container">
-        <div class="image-content">
-          Førespurnad:
-          <!-- prettier-ignore -->
-          <div class="code language-graphql">
-query ($word: String!, $dicts: [Dictionary!]) {
-  word(word: $word, dicts: $dictionaries) {
-    articles {
-      id
-      wordClass
-      definitions {
-        content {
-          textContent
-        }
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebAPI",
+        "name": "Ordbok API",
+        "description": "Gratis og ope GraphQL API for Bokmålsordboka, Nynorskordboka og Norsk Ordbok.",
+        "url": "https://api.ordbokapi.org/graphql",
+        "documentation": "https://api.ordbokapi.org/graphql",
+        "provider": {
+          "@type": "Person",
+          "name": "Adaline Simonian",
+          "url": "https://github.com/adalinesimonian"
+        },
+        "license": "https://www.gnu.org/licenses/agpl-3.0.html",
+        "isAccessibleForFree": true,
+        "inLanguage": ["nn", "nb", "no"]
       }
-    }
-  }
-}
-          </div>
-          Variabler:
-          <!-- prettier-ignore -->
-          <div class="code language-json">
-{
-  "word": "forstå",
-  "dicts": ["Nynorskordboka"]
-}
-          </div>
-        </div>
-        <div class="text-content">
-          <p>
-            Oppdag krafta i Ordbok API, eit verktøy designa for å forenkla
-            tilgangen til omfattande informasjon frå dei offisielle norske
-            ordbøkene. APIet vårt gir deg:
-          </p>
-          <ul>
-            <li>
-              <strong>Rask tilgang:</strong> Snarleg henting av orddefinisjonar
-              og døme.
-            </li>
-            <li>
-              <strong>Fleksibilitet:</strong> Tilpassa søk for varierte
-              brukstilfelle.
-            </li>
-            <li>
-              <strong>Effektiv datahandtering:</strong> GraphQL-spørjespråk for
-              å henta nøyaktig den informasjonen du treng.
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="usage" class="jumbotron text-on-right">
-      <div class="container">
-        <div class="image-content">
-          Respons:
-          <!-- prettier-ignore -->
-          <div class="code language-json">
-{
-  "data": {
-    "word": {
-      "articles": [{
-        "id": 20953,
-        "wordClass": "Verb",
-        "definitions": [
-          {
-            "content": [
-              { "textContent": "skjøne, oppfatte, fatte" },
-              { "textContent": "kunne" }
-            ]
-          },
-          {
-            "content": [
-              { "textContent": "kunne setje seg inn i stoda til" },
-              { "textContent": "ha toleranse og sympati for" }
-            ]
-          }
-        ]
-      }]
-    }
-  }
-}
-          </div>
-          <script type="module" src="highlighting.js"></script>
-        </div>
-        <div class="text-content">
-          <p>
-            Akkurat no er Ordbok API i ein utviklingsfase og kan vera ustabil.
-            Fullstendig dokumentasjon er ikkje tilgjengeleg endå. Me oppmodar
-            brukarar til å nytta seg av GraphQL sandbox for å utforska og testa
-            APIet:
-          </p>
-          <ol>
-            <li>
-              <strong>Besøk endepunkt:</strong> Gå til
-              <a href="https://api.ordbokapi.org/graphql">Apollo Sandbox</a>.
-            </li>
-            <li>
-              <strong>Test førespurnader:</strong> Bruk sandkassa til å gjera
-              førespurnader og sjå responsane.
-            </li>
-            <li>
-              <strong>Gi tilbakemelding:</strong> Me verdset tilbakemeldinga di
-              for å forbetra APIet.
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="jumbotron" id="oppdrag">
-      <div class="container">
-        <div class="image-content">
-          <h2>Oppdraget vårt</h2>
-        </div>
-        <div class="text-content">
-          <p>
-            Norsk, med dei mange skriftformene sine, dialektar, og omfattande
-            leksikon, byr på unike utfordringar og moglegheiter for
-            språkteknologi. Historisk sett har det å få tilgang til omfattande
-            språklege ressursar kravd navigering i ein labyrint av ulike
-            plattformer og format.
-          </p>
-          <p>
-            Misjonen vår er enkel, men djup:<strong>
-              å sameina alle norske ordbøker — nynorsk, bokmål, og andre — i
-              eitt enkelt, brukarvennleg GraphQL API</strong
-            >. På den måten ynskjer me å bryta ned barrierane for datatilgang og
-            gjera det mogleg å byggja alle slags integrasjonar med enkel tilgang
-            til ordbokdata.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="jumbotron text-on-right" id="tilgjengelegheit">
-      <div class="container">
-        <div class="image-content">
-          <h2>Gratis og open tilgang — for alle og alltid</h2>
-        </div>
-        <div class="text-content">
-          <p>
-            Vi meiner at tilgang til kunnskap skal vera universell og uhindra.
-            Det er derfor
-            <strong>
-              Ordbok API er, og alltid vil vera, gratis for allmenta</strong
-            >. Forpliktinga vår til tilgjengelegheit sikrar at kven som helst,
-            kvar som helst, kan utforska og engasjera seg i norske
-            språkressursar utan økonomiske barrierar.
-          </p>
-          <p>
-            Tilgang til språklege og kulturelle data bør vera gratis og open for
-            alle.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="jumbotron" id="open-source">
-      <div class="container">
-        <div class="image-content">
-          <h2>Omfamnar open kjeldekode</h2>
-        </div>
-        <div class="text-content">
-          <p>
-            <strong
-              >Ordbok API-prosjektet byggjer på prinsippa for open
-              kjeldekode.</strong
-            >
-            Me trur på openheit, samarbeid og samfunnsdriven utvikling. Ved å
-            gjera API-et vårt fritt tilgjengeleg, inviterer me alle til å berika
-            og utvida språkverktøya våre.
-          </p>
-          <p>
-            Denne open kjeldekode-tilnærminga påskundar ikkje berre innovasjon,
-            men sikrar òg at ressursane våre held fram med å vera tilgjengelege
-            og gratis for alle, for alltid,
-            <strong>uavhengig av kommersielle interesser</strong>.
-          </p>
-          <p>
-            Bli med og bidra til Ordbok API-prosjektet på
-            <a href="https://github.com/ordbokapi">GitHub</a> for å forma
-            framtida for norsk språkteknologi.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <p>
-          © 2023 Adaline Simonian. Alle rettar reservert. For spørsmål og
-          tilbakemeldingar, kontakt oss på
-          <a href="https://github.com/adalinesimonian">Github</a>.
-        </p>
-        <p>
-          Tekst og data frå ordbøkene er ©
-          <a href="https://www.sprakradet.no/">Språkrådet</a> og
-          <a href="https://www.uib.no/">Universitetet i Bergen</a>, og er henta
-          frå <a href="https://ordbokene.no/">ordbokene.no</a>.
-        </p>
-        <p>
-          Dette prosjektet er eit uavhengig samfunnsprosjekt av Adaline Simonian
-          og har ingen tilknytning til Universitetet i Bergen eller Språkrådet.
-        </p>
-      </div>
-    </footer>
+    </script>
+  </head>
+  <body>
+    <div id="app"><!--app--></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

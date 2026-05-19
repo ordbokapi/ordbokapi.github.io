@@ -1,0 +1,14 @@
+query ArticleGraph($articleId: Int!, $dictionary: Dictionary!, $depth: Int!) {
+  articleGraph(id: $articleId, dictionary: $dictionary, depth: $depth) {
+    nodes {
+      id
+      lemmas {
+        lemma
+      }
+    }
+    edges {
+      sourceId
+      targetId
+    }
+  }
+}

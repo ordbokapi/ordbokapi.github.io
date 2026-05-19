@@ -1,0 +1,40 @@
+{
+  "name": "ordbokapi.github.io",
+  "type": "module",
+  "private": true,
+  "packageManager": "yarn@4.14.1",
+  "volta": {
+    "node": "26.1.0",
+    "yarn": "4.14.1"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "codegen": "graphql-codegen",
+    "format": "prettier --write .",
+    "preview": "vite preview",
+    "lint": "prettier --check . && tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
+    "lucide-solid": "^1.16.0",
+    "solid-js": "^1.9.13"
+  },
+  "devDependencies": {
+    "@esbuild/linux-x64": "^0.28.0",
+    "@graphql-codegen/cli": "^7.0.0",
+    "@graphql-codegen/client-preset": "^6.0.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@types/d3-force": "^3.0.10",
+    "@types/node": "^25.9.1",
+    "d3-force": "^3.0.0",
+    "graphql": "^16.14.0",
+    "lz-string": "^1.5.0",
+    "prettier": "^3.8.3",
+    "shiki": "^4.0.2",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.13",
+    "vite-plugin-solid": "^2.11.12"
+  }
+}

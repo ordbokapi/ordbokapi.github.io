@@ -1,0 +1,29 @@
+query DialectWords($place: String!) {
+  articles(
+    dictionaries: [NorskOrdbok]
+    filter: { wordClass: Substantiv, dialectPlace: { name: { eq: $place } } }
+  ) {
+    totalCount
+    edges {
+      node {
+        id
+        lemmas {
+          lemma
+        }
+        flatDefinitions {
+          parentIndex
+          content {
+            textContent
+          }
+        }
+        dialect(filter: { place: { name: { eq: $place } } }) {
+          subcategories {
+            forms {
+              form
+            }
+          }
+        }
+      }
+    }
+  }
+}

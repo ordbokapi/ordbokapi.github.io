@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: Copyright (C) 2023 Adaline Simonian
+// SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
 // SPDX-License-Identifier: AGPL-3.0-or-later
 //
 // This file is part of Ordbok API.
@@ -16,20 +16,20 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-document.addEventListener("DOMContentLoaded", () => {
-  const hamburger = document.querySelector(".hamburger");
-  const navLinks = document.querySelector(".navbar-links");
-  const container = document.querySelector("#navbar .container");
+import styles from "./OpenSource.module.css";
 
-  hamburger.addEventListener("click", () => {
-    if (navLinks.dataset.shown === "false") {
-      navLinks.dataset.shown = "true";
-
-      container.style.maxHeight = "100vh";
-    } else {
-      navLinks.dataset.shown = "false";
-
-      container.style.maxHeight = "84px";
-    }
-  });
-});
+export default function OpenSource() {
+  return (
+    <section class={styles.section} aria-label="Open kjeldekode">
+      <h2 class={styles.heading}>Bygd i det opne</h2>
+      <p class={styles.desc}>
+        Ordbok API er fri programvare, lisensiert under AGPL-3.0-or-later. All
+        kjeldekode er open, bidrag er velkomne og prosjektet er drive av
+        fellesskapet. Språkdata bør vera tilgjengeleg for alle utan atterhald.
+      </p>
+      <a href="https://github.com/ordbokapi/api" class="btn btn-primary">
+        Sjå prosjektet på GitHub
+      </a>
+    </section>
+  );
+}

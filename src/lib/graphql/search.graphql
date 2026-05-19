@@ -1,0 +1,28 @@
+query Search($filter: ArticleFilter!, $dictionaries: [Dictionary!]!) {
+  articles(filter: $filter, dictionaries: $dictionaries) {
+    totalCount
+    facets {
+      wordClass {
+        value
+        count
+      }
+    }
+    edges {
+      node {
+        id
+        dictionary
+        lemmas {
+          lemma
+        }
+        wordClass
+        gender
+        flatDefinitions {
+          parentIndex
+          content {
+            textContent
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,133 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.codeBlock {
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+}
+
+.codeBlock code {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.highlighted :global(pre.shiki) {
+  background: var(--bg-code) !important;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  white-space: pre;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+}
+
+.highlighted :global(pre.shiki code) {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.highlighted :global(pre.shiki span) {
+  color: var(--shiki-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"]))
+    .highlighted
+    :global(pre.shiki span) {
+    color: var(--shiki-dark);
+  }
+
+  :global(:root:not([data-theme="light"])) .highlighted :global(pre.shiki) {
+    background: var(--bg-code) !important;
+  }
+}
+
+:global(:root[data-theme="dark"]) .highlighted :global(pre.shiki span) {
+  color: var(--shiki-dark);
+}
+
+:global(:root[data-theme="dark"]) .highlighted :global(pre.shiki) {
+  background: var(--bg-code) !important;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.codeWrapper {
+  position: relative;
+}
+
+.copyButton {
+  all: unset;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.codeWrapper:hover .copyButton,
+.copyButton:focus-visible {
+  opacity: 1;
+}
+
+.copyButton:hover {
+  color: var(--text);
+  background: var(--bg-hover, var(--bg-code));
+}
+
+.copyButton:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}

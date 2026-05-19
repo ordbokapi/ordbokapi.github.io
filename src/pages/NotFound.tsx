@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: Copyright (C) 2023 Adaline Simonian
+// SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
 // SPDX-License-Identifier: AGPL-3.0-or-later
 //
 // This file is part of Ordbok API.
@@ -16,12 +16,19 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-import hljs from "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/highlight.min.js";
-import graphql from "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/es/languages/graphql.min.js";
+import styles from "./not-found.module.css";
 
-hljs.registerLanguage("graphql", graphql);
-
-document.querySelectorAll("div.code").forEach((div) => {
-  hljs.highlightElement(div);
-  console.log("highlighted", div);
-});
+export default function NotFound() {
+  return (
+    <div class={styles.page}>
+      <h1>404</h1>
+      <p class={styles.subtitle}>Sida finst ikkje</p>
+      <p class={styles.description}>
+        Me fann ikkje sida du leita etter. Ho kan ha vorte flytta eller sletta.
+      </p>
+      <a href="/" class="btn btn-primary">
+        Til framsida
+      </a>
+    </div>
+  );
+}
