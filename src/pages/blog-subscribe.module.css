@@ -1,0 +1,130 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+  text-align: center;
+}
+
+.page h1 {
+  margin-bottom: 16px;
+}
+
+.lead {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto 32px;
+}
+
+.input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+
+.input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+  border-color: var(--primary);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.message {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.success {
+  color: var(--primary);
+}
+
+.error {
+  color: var(--color-error);
+}
+
+.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-top: 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 40px 0 24px;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.dividerIcon {
+  font-size: 1.5rem;
+}
+
+.privacy {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.privacy p {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 480px) {
+  .form {
+    flex-direction: column;
+  }
+}

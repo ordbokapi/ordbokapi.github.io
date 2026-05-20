@@ -50,7 +50,7 @@ export default function Footer() {
               <a href="https://github.com/ordbokapi/api">GitHub</a>
             </li>
             <li>
-              <a href="https://blog.ordbokapi.org/">Blogg</a>
+              <a href="/blogg/">Blogg</a>
             </li>
             <li>
               <a href="https://status.ordbokapi.org/">Status</a>

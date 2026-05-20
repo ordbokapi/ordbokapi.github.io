@@ -16,9 +16,24 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-const knownPaths = new Set(["/", "/personvern"]);
+import type { Plugin } from "vite";
+import { staticPages } from "./routes.mts";
 
-export default function notFoundPlugin() {
+const knownStaticPaths = new Set(
+  staticPages
+    .filter((p) => p.path !== "/404")
+    .map((p) => p.path.replace(/\/+$/, "") || "/"),
+);
+
+function isKnownPath(path: string): boolean {
+  if (knownStaticPaths.has(path)) {
+    return true;
+  }
+
+  return path.startsWith("/blogg/") && path !== "/blogg/";
+}
+
+export default function notFoundPlugin(): Plugin {
   return {
     name: "not-found-page",
     apply: "serve",
@@ -34,14 +49,15 @@ export default function notFoundPlugin() {
           ) {
             const path = req.url.replace(/\/+$/, "") || "/";
 
-            if (!knownPaths.has(path)) {
+            if (!isKnownPath(path)) {
               const originalWrite = res.writeHead.bind(res);
 
-              req.url = "/index.html";
-              res.writeHead = (statusCode, ...args) => {
-                return originalWrite(404, ...args);
+              res.writeHead = (_statusCode: number, ...args: unknown[]) => {
+                return originalWrite(404, ...(args as []));
               };
             }
+
+            req.url = "/index.html";
           }
           next();
         });

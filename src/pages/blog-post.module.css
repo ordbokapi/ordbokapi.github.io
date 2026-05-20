@@ -1,0 +1,222 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.page {
+  composes: page from "./blog.module.css";
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  margin-bottom: 12px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.authorName {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pronouns {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.separator {
+  color: var(--border);
+}
+
+.featuredImage {
+  width: 100%;
+  border-radius: var(--radius-md);
+  margin-bottom: 32px;
+}
+
+.content {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.content p {
+  margin-bottom: 1.25em;
+}
+
+.content h2 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+.content h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+
+.content a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.content ul,
+.content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+}
+
+.content li {
+  margin-bottom: 0.4em;
+}
+
+.content li strong {
+  color: var(--text);
+}
+
+.content blockquote {
+  border-left: 3px solid var(--primary);
+  padding: 0.5em 1em;
+  margin: 1.5em 0;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.content blockquote p {
+  margin-bottom: 0;
+}
+
+.content figure {
+  margin: 2em 0;
+  text-align: center;
+}
+
+.content figure img {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+}
+
+.content figcaption {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.content pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1em;
+  overflow-x: auto;
+  margin-bottom: 1.25em;
+  font-size: 0.9rem;
+}
+
+.content code {
+  background: var(--bg-code);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+.content pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+.authorBlurb {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.blurbAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.blurbContent {
+  min-width: 0;
+}
+
+.blurbName {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.blurbPronouns {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.blurbBio {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+.blurbSocial {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  list-style: none;
+}
+
+.blurbSocial a {
+  font-size: 0.85rem;
+}
+
+.draftBadge {
+  composes: draftBadge from "./blog.module.css";
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  margin-bottom: 8px;
+}
+
+.licence {
+  composes: licence from "./blog.module.css";
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+}

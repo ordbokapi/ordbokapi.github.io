@@ -16,40 +16,16 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
+import type { Logger, Plugin } from "vite";
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { resolve, dirname } from "path";
 import { createServer } from "vite";
+import { getAllPages, pathToOutFile, siteUrl } from "./routes.mts";
 
-const pages = [
-  {
-    path: "/",
-    outFile: "index.html",
-    title: "Ordbok API | Tre norske ordbøker. Eitt API.",
-    description:
-      "Gratis og ope GraphQL API for Bokmålsordboka, Nynorskordboka og Norsk Ordbok. Utforsk, bygg med og forsk på det norske språket.",
-    canonical: "https://ordbokapi.org/",
-  },
-  {
-    path: "/personvern/",
-    outFile: "personvern/index.html",
-    title: "Personvern | Ordbok API",
-    description:
-      "Personvernpolicy for Ordbok API. Korleis vi handsamar data og personvern.",
-    canonical: "https://ordbokapi.org/personvern/",
-  },
-  {
-    path: "/404",
-    outFile: "404.html",
-    title: "Sida finst ikkje | Ordbok API",
-    description: "Sida du leita etter, finst ikkje.",
-    canonical: "https://ordbokapi.org/",
-  },
-];
-
-export default function prerenderPlugin() {
-  let root;
-  let outDir;
-  let logger;
+export default function prerenderPlugin(): Plugin {
+  let root: string;
+  let outDir: string;
+  let logger: Logger;
 
   return {
     name: "prerender",
@@ -65,6 +41,7 @@ export default function prerenderPlugin() {
       logger.info("\nPrerendering pages...");
 
       const template = await readFile(resolve(outDir, "index.html"), "utf-8");
+      const pages = await getAllPages();
 
       const vite = await createServer({
         root,
@@ -77,6 +54,7 @@ export default function prerenderPlugin() {
         const { render } = await vite.ssrLoadModule("/src/entry-server.tsx");
 
         for (const page of pages) {
+          const canonical = `${siteUrl}${page.path}`;
           const { html: appHtml, hydrationScript } = await render(page.path);
 
           let html = template;
@@ -93,11 +71,11 @@ export default function prerenderPlugin() {
           );
           html = html.replace(
             /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/,
-            `<link rel="canonical" href="${page.canonical}" />`,
+            `<link rel="canonical" href="${canonical}" />`,
           );
           html = html.replace(
             /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/,
-            `<meta property="og:url" content="${page.canonical}" />`,
+            `<meta property="og:url" content="${canonical}" />`,
           );
           html = html.replace(
             /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/,
@@ -108,7 +86,44 @@ export default function prerenderPlugin() {
             `<meta property="og:description" content="${page.description}" />`,
           );
 
-          const outPath = resolve(outDir, page.outFile);
+          if (
+            "article" in page &&
+            page.path.startsWith("/blogg/") &&
+            !page.path.endsWith("/blogg/")
+          ) {
+            const { article } = page;
+
+            html = html.replace(
+              /<meta\s+property="og:type"\s+content="[^"]*"\s*\/?>/,
+              `<meta property="og:type" content="article" />`,
+            );
+
+            html = html.replace(
+              "</head>",
+              `<meta property="article:published_time" content="${article.date}" />\n</head>`,
+            );
+
+            if (article.author) {
+              html = html.replace(
+                "</head>",
+                `<meta property="article:author" content="${article.author}" />\n</head>`,
+              );
+            }
+
+            if (article.image) {
+              html = html.replace(
+                /<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/,
+                `<meta property="og:image" content="${article.image}" />`,
+              );
+            }
+
+            html = html.replace(
+              "</head>",
+              `<link rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/deed.no" />\n</head>`,
+            );
+          }
+
+          const outPath = resolve(outDir, pathToOutFile(page.path));
 
           await mkdir(dirname(outPath), { recursive: true });
           await writeFile(outPath, html);

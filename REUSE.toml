@@ -13,6 +13,7 @@ path = [
   "renovate.json",
   "package.json",
   "tsconfig.json",
+  "tsconfig.build.json",
   "yarn.lock",
   "src/data/**",
   "src/lib/graphql/**",
@@ -34,3 +35,8 @@ path = [
 ]
 SPDX-FileCopyrightText = "Copyright (c) Yan Krukau, Mikhail Nilov, Thirdman, Joachim Hoholm"
 SPDX-License-Identifier = "LicenseRef-Pexels-May-2026"
+
+[[annotations]]
+path = "public/blogg/**"
+SPDX-FileCopyrightText = "Copyright (C) 2024 Adaline Simonian"
+SPDX-License-Identifier = "CC-BY-SA-4.0"

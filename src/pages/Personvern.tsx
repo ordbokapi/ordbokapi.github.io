@@ -27,17 +27,34 @@ export default function Personvern() {
 
         <h2>Kva data samlar me inn?</h2>
         <p>
-          Ordbok API samlar ikkje inn person&shy;opplysningar. Me lagrar ikkje
-          brukar&shy;kontoar, e-post&shy;adresser eller annan identifiserande
-          informasjon.
+          Bruk av API-et krev ikkje registrering, og me lagrar ikkje
+          brukar&shy;kontoar. Me samlar berre inn det minimum av data som er
+          naudsynt for å drifte tenesta trygt:
+        </p>
+        <ul>
+          <li>
+            <strong>IP-adresser og førespurnads&shy;data</strong> vert
+            mellombels logga når du brukar API-et, for å overvaka tenesta og
+            hindre misbruk.
+          </li>
+          <li>
+            <strong>E-post&shy;adressa di</strong> vert lagra berre dersom du
+            sjølv vel å abonnere på blogg&shy;oppdateringar om API-et.
+          </li>
+        </ul>
+        <p>
+          Utover dette samlar me ikkje inn person&shy;opplysningar. Me sel ikkje
+          data til tredjepartar, og me brukar ikkje dataa til
+          marknads&shy;føring eller profilering.
         </p>
 
         <h3>Tenesteloggar</h3>
         <p>
-          API-tenaren loggar IP-adresser og førespurnads&shy;data for å overvaka
-          tenesta og hindre misbruk. Behandling av data i teneste&shy;loggar
-          skjer med grunnlag i legitim interesse for tryggleik og hindring av
-          misbruk, jf.{" "}
+          Når du sender førespurnader til API-et, loggar tenaren IP-adressa di
+          saman med teknisk førespurnads&shy;data, til dømes tidspunkt,
+          endepunkt og status&shy;kode. Dette skjer for alle som brukar API-et,
+          og er naudsynt for å overvaka tenesta og hindre misbruk. Behandlinga
+          skjer med grunnlag i legitim interesse, jf.{" "}
           <a href="https://lovdata.no/lov/2018-06-15-38/gdpr/a6">
             GDPR artikkel 6(1)(f)
           </a>
@@ -49,6 +66,23 @@ export default function Personvern() {
           grensa. Det finst difor ikkje ein fast lagrings&shy;periode; kor lenge
           data vert lagra avheng av kor mykje tenesta vert bruka. Likevel
           avgrensar dette kor lang tid data kan ligge på tenaren.
+        </p>
+
+        <h3>E-postabonnement for blogg&shy;oppdateringar</h3>
+        <p>
+          E-post&shy;abonnementet er heilt friviljug og skilt frå sjølve
+          API-bruken. Du treng ikkje abonnere for å bruke API-et.
+        </p>
+        <p>
+          Dersom du vel å abonnere, lagrar me e-post&shy;adressa di for å sende
+          deg varsel om nye innlegg. Behandlinga skjer med grunnlag i samtykke,
+          jf.{" "}
+          <a href="https://lovdata.no/lov/2018-06-15-38/gdpr/a6">
+            GDPR artikkel 6(1)(a)
+          </a>
+          . Du kan når som helst{" "}
+          <a href="/blogg/avslutt/">avslutte abonnementet</a>, og
+          e-post&shy;adressa di vert då sletta.
         </p>
 
         <h3>Informasjonskapslar</h3>
@@ -79,6 +113,14 @@ export default function Personvern() {
             </a>
             .
           </li>
+          <li>
+            <strong>Proton Mail</strong>: E-post for blogg&shy;abonnement vert
+            sendt via Proton Mail. Sjå{" "}
+            <a href="https://proton.me/legal/privacy">
+              personvern&shy;erklæringa deira
+            </a>
+            .
+          </li>
         </ul>
 
         <h2>Rettane dine</h2>
@@ -86,6 +128,10 @@ export default function Personvern() {
           Du har rett til å bede om innsyn i, retting av eller sletting av data
           me har om deg. Sidan loggdata vert automatisk overskrive, kan det
           hende at dataa alt er sletta når du tek kontakt.
+        </p>
+        <p>
+          For e-post&shy;abonnement kan du avslutte abonnementet når som helst
+          ved å trykkje på avmeldings&shy;lenkja i e-postane du får.
         </p>
 
         <h2>Kontakt</h2>

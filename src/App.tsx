@@ -22,6 +22,12 @@ import Footer from "~/components/Footer";
 import Home from "~/pages/Home";
 import Personvern from "~/pages/Personvern";
 import NotFound from "~/pages/NotFound";
+import BlogHome from "~/pages/BlogHome";
+import BlogPostPage from "~/pages/BlogPost";
+import BlogSubscribe from "~/pages/BlogSubscribe";
+import BlogVerify from "~/pages/BlogVerify";
+import BlogUnsubscribe from "~/pages/BlogUnsubscribe";
+import { posts, authors } from "virtual:blog-content";
 import "@fontsource/ibm-plex-sans/400.css";
 import "@fontsource/ibm-plex-sans/400-italic.css";
 import "@fontsource/ibm-plex-sans/600.css";
@@ -30,40 +36,73 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "./App.css";
 
-function getPage(): "home" | "personvern" | "not-found" {
+type Page =
+  | "home"
+  | "personvern"
+  | "not-found"
+  | "blog-home"
+  | "blog-post"
+  | "blog-subscribe"
+  | "blog-verify"
+  | "blog-unsubscribe";
+
+function getPath(): string {
   if (typeof window !== "undefined") {
-    const path = window.location.pathname.replace(/\/+$/, "") || "/";
+    return window.location.pathname.replace(/\/+$/, "") || "/";
+  }
+  return ((globalThis as any).__SSR_PATH__ ?? "/").replace(/\/+$/, "") || "/";
+}
 
-    if (path === "/personvern") {
-      return "personvern";
+function match<T, R>(
+  value: T,
+  cases: [((v: T) => boolean) | T, R][],
+  defaultCase: R,
+): R {
+  for (const [predicate, result] of cases) {
+    if (typeof predicate === "function") {
+      if ((predicate as (v: T) => boolean)(value)) {
+        return result;
+      }
+    } else {
+      if (predicate === value) {
+        return result;
+      }
     }
-
-    if (path === "/") {
-      return "home";
-    }
-
-    return "not-found";
   }
 
-  const ssrPath =
-    ((globalThis as any).__SSR_PATH__ ?? "/").replace(/\/+$/, "") || "/";
+  return defaultCase;
+}
 
-  if (ssrPath === "/personvern") {
-    return "personvern";
-  }
-
-  if (ssrPath === "/404") {
-    return "not-found";
-  }
-
-  return "home";
+function getPage(path: string): Page {
+  return match(
+    path,
+    [
+      ["/", "home"],
+      ["/personvern", "personvern"],
+      ["/blogg", "blog-home"],
+      ["/blogg/abonner", "blog-subscribe"],
+      ["/blogg/stadfest", "blog-verify"],
+      ["/blogg/avslutt", "blog-unsubscribe"],
+      [(p) => p.startsWith("/blogg/"), "blog-post"],
+    ],
+    "not-found",
+  );
 }
 
 export default function App() {
-  const [page, setPage] = createSignal(getPage());
+  const [path, setPath] = createSignal(getPath());
+  const page = () => getPage(path());
+  const post = () =>
+    posts.find((p) => p.path.replace(/\/+$/, "") === path()) ?? null;
+  const postAuthor = () => {
+    const p = post();
+
+    return p?.author ? (authors[p.author] ?? null) : null;
+  };
 
   onMount(() => {
-    const handler = () => setPage(getPage());
+    const handler = () => setPath(getPath());
+
     window.addEventListener("popstate", handler);
   });
 
@@ -80,7 +119,24 @@ export default function App() {
         <Show when={page() === "personvern"}>
           <Personvern />
         </Show>
-        <Show when={page() === "not-found"}>
+        <Show when={page() === "blog-home"}>
+          <BlogHome posts={posts} authors={authors} />
+        </Show>
+        <Show when={page() === "blog-post" && post()}>
+          <BlogPostPage post={post()!} author={postAuthor() ?? undefined} />
+        </Show>
+        <Show when={page() === "blog-subscribe"}>
+          <BlogSubscribe />
+        </Show>
+        <Show when={page() === "blog-verify"}>
+          <BlogVerify />
+        </Show>
+        <Show when={page() === "blog-unsubscribe"}>
+          <BlogUnsubscribe />
+        </Show>
+        <Show
+          when={page() === "not-found" || (page() === "blog-post" && !post())}
+        >
           <NotFound />
         </Show>
       </main>

@@ -16,6 +16,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
+import type { Logger, Plugin, ViteDevServer } from "vite";
 import { readFile } from "fs/promises";
 import { resolve } from "path";
 import { format } from "prettier";
@@ -34,11 +35,15 @@ async function loadShowcaseQueries() {
 const virtualId = "virtual:showcase-data";
 const resolvedId = "\0" + virtualId;
 
-async function readQuery(name) {
+async function readQuery(name: string): Promise<string> {
   return await readFile(resolve(graphqlDir, `${name}.graphql`), "utf-8");
 }
 
-async function fetchQuery(apiUrl, query, variables) {
+async function fetchQuery(
+  apiUrl: string,
+  query: string,
+  variables: Record<string, unknown> | undefined,
+) {
   const res = await fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -53,19 +58,23 @@ async function fetchQuery(apiUrl, query, variables) {
 
   if (json.errors) {
     throw new Error(
-      `GraphQL errors:\n${json.errors.map((e) => e.message).join("\n")}`,
+      `GraphQL errors:\n${json.errors.map((e: { message: string }) => e.message).join("\n")}`,
     );
   }
 
   return json.data;
 }
 
-async function formatJson(data) {
+async function formatJson(data: unknown): Promise<string> {
   const raw = JSON.stringify(data);
   return await format(raw, { parser: "json", printWidth: 60 });
 }
 
-function sandboxUrl(apiUrl, document, variables) {
+function sandboxUrl(
+  apiUrl: string,
+  document: string,
+  variables: Record<string, unknown> | undefined,
+): string {
   const state = JSON.stringify({
     document,
     ...(variables ? { variables: JSON.stringify(variables, null, 2) } : {}),
@@ -75,8 +84,11 @@ function sandboxUrl(apiUrl, document, variables) {
   return `${apiUrl}?explorerURLState=${encoded}`;
 }
 
-async function fetchAllShowcaseData(apiUrl) {
-  const showcaseQueries = await loadShowcaseQueries();
+async function fetchAllShowcaseData(apiUrl: string) {
+  const showcaseQueries = (await loadShowcaseQueries()) as Record<
+    string,
+    { display: string; file: string; variables?: Record<string, unknown> }
+  >;
 
   const entries = await Promise.all(
     Object.entries(showcaseQueries).map(
@@ -112,23 +124,24 @@ const dictLabels = {
   NorskOrdbok: "Norsk Ordbok",
 };
 
-function buildShowcaseMeta(data) {
+function buildShowcaseMeta(data: Record<string, any>) {
   const exact = data.lookup?.suggestions?.exact?.[0];
   return {
     lookup: {
       word: exact?.word ?? "",
       labels: (exact?.articles ?? []).map(
-        (a) => dictLabels[a.dictionary] ?? a.dictionary,
+        (a: { dictionary: string }) =>
+          dictLabels[a.dictionary as keyof typeof dictLabels] ?? a.dictionary,
       ),
     },
   };
 }
 
-export default function showcaseDataPlugin() {
-  let cachedModule = null;
+export default function showcaseDataPlugin(): Plugin {
+  let cachedModule: string | null = null;
   let apiUrl = "https://api.ordbokapi.org/graphql";
-  let logger;
-  let server;
+  let logger: Logger;
+  let server: ViteDevServer | undefined;
 
   return {
     name: "showcase-data",

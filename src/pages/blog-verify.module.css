@@ -1,0 +1,61 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 64px 24px 80px;
+  text-align: center;
+}
+
+.page h1 {
+  margin-bottom: 16px;
+}
+
+.message {
+  margin-top: 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.success {
+  color: var(--primary);
+}
+
+.error {
+  color: var(--color-error);
+}
+
+.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-top: 24px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -5,6 +5,7 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
     "allowJs": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
@@ -19,8 +20,8 @@
   },
   "include": [
     "*.ts",
-    "plugins/**/*.mjs",
-    "scripts/**/*.mjs",
+    "plugins/**/*.mts",
+    "scripts/**/*.mts",
     "src/**/*.ts",
     "src/**/*.tsx"
   ]

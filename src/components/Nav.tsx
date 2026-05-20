@@ -26,7 +26,7 @@ const navLinks = [
   { href: "https://api.ordbokapi.org/graphql", label: "Apollo Sandbox" },
   { href: "https://vis.ordbokapi.org", label: "Vis-klient" },
   { href: "https://github.com/ordbokapi/api", label: "GitHub" },
-  { href: "https://blog.ordbokapi.org/", label: "Blogg" },
+  { href: "/blogg/", label: "Blogg" },
   { href: "https://status.ordbokapi.org/", label: "Status" },
 ];
 

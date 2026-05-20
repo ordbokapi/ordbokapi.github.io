@@ -16,13 +16,14 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
+import type { Plugin, Logger } from "vite";
 import { writeFile, mkdir, access } from "fs/promises";
 import { resolve } from "path";
 import { loadEnv } from "vite";
 
 const fontFiles = ["ScandiaWebBold.woff2", "ScandiaWebBold.woff"];
 
-async function allExist(files) {
+async function allExist(files: string[]): Promise<boolean> {
   try {
     await Promise.all(files.map((f) => access(f)));
 
@@ -32,7 +33,11 @@ async function allExist(files) {
   }
 }
 
-async function ensureFonts(fontDir, baseUrl, logger) {
+async function ensureFonts(
+  fontDir: string,
+  baseUrl: string,
+  logger: Logger,
+): Promise<void> {
   if (await allExist(fontFiles.map((f) => resolve(fontDir, f)))) {
     return;
   }
@@ -57,10 +62,10 @@ async function ensureFonts(fontDir, baseUrl, logger) {
   logger.info("✓ Scandia font fetched");
 }
 
-export default function scandiaFontPlugin() {
-  let fontDir;
-  let logger;
-  let baseUrl;
+export default function scandiaFontPlugin(): Plugin {
+  let fontDir: string;
+  let logger: Logger;
+  let baseUrl: string | undefined;
 
   return {
     name: "scandia-font",

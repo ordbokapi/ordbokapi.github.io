@@ -19,15 +19,21 @@
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
-import showcaseDataPlugin from "./plugins/showcase-data.mjs";
-import prerenderPlugin from "./plugins/prerender.mjs";
-import notFoundPlugin from "./plugins/not-found.mjs";
-import scandiaFontPlugin from "./plugins/scandia-font.mjs";
+import showcaseDataPlugin from "./plugins/showcase-data.mts";
+import blogContentPlugin from "./plugins/blog-content.mts";
+import blogFeedPlugin from "./plugins/blog-feed.mts";
+import sitemapPlugin from "./plugins/sitemap.mts";
+import prerenderPlugin from "./plugins/prerender.mts";
+import notFoundPlugin from "./plugins/not-found.mts";
+import scandiaFontPlugin from "./plugins/scandia-font.mts";
 
 export default defineConfig({
   appType: "mpa",
   plugins: [
     showcaseDataPlugin(),
+    blogContentPlugin(),
+    blogFeedPlugin(),
+    sitemapPlugin(),
     solidPlugin({ ssr: true }),
     prerenderPlugin(),
     notFoundPlugin(),
@@ -44,5 +50,8 @@ export default defineConfig({
   build: {
     target: "esnext",
     outDir: "dist",
+    watch: {
+      include: ["content/**"],
+    },
   },
 });
