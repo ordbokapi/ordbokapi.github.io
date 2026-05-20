@@ -1,4 +1,18 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", "helpers:pinGitHubActionDigestsToSemver"]
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigestsToSemver"],
+  "packageRules": [
+    {
+      "matchDatasources": ["node-version"],
+      "matchPackageNames": ["node"],
+      "groupName": "node",
+      "groupSlug": "node"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node"],
+      "groupName": "node",
+      "groupSlug": "node"
+    }
+  ]
 }
