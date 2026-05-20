@@ -2,10 +2,10 @@
   "name": "ordbokapi.github.io",
   "type": "module",
   "private": true,
-  "packageManager": "yarn@4.14.1",
+  "packageManager": "yarn@4.15.0",
   "volta": {
     "node": "26.1.0",
-    "yarn": "4.14.1"
+    "yarn": "4.15.0"
   },
   "scripts": {
     "dev": "vite",
