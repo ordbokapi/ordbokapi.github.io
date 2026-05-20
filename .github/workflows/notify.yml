@@ -27,11 +27,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  notify:
+  detect:
     runs-on: ubuntu-latest
-    environment: subscriber-notification
 
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    outputs:
+      has_new_post: ${{ steps.detect.outputs.has_new_post }}
+      title: ${{ steps.detect.outputs.title }}
+      url: ${{ steps.detect.outputs.url }}
+      summary: ${{ steps.detect.outputs.summary }}
 
     steps:
       - name: Checkout
@@ -80,17 +85,23 @@ jobs:
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "summary=$summary" >> "$GITHUB_OUTPUT"
 
+  notify:
+    runs-on: ubuntu-latest
+    environment: subscriber-notification
+    needs: detect
+    if: needs.detect.outputs.has_new_post == 'true'
+
+    steps:
       - name: Notify mailer
-        if: steps.detect.outputs.has_new_post == 'true'
         run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST "https://blog-api.ordbokapi.org/new-post" \
             -H "Authorization: ${{ secrets.API_KEY }}" \
             -H "Content-Type: application/json" \
             -d "$(jq -n \
-              --arg title "${{ steps.detect.outputs.title }}" \
-              --arg url "${{ steps.detect.outputs.url }}" \
-              --arg summary "${{ steps.detect.outputs.summary }}" \
+              --arg title "${{ needs.detect.outputs.title }}" \
+              --arg url "${{ needs.detect.outputs.url }}" \
+              --arg summary "${{ needs.detect.outputs.summary }}" \
               '{title: $title, url: $url, summary: $summary}')")
 
           echo "Mailer responded with: $response"
