@@ -50,8 +50,8 @@ export default defineConfig({
   build: {
     target: "esnext",
     outDir: "dist",
-    watch: {
-      include: ["content/**"],
-    },
+    watch: process.argv.includes("--watch")
+      ? { include: ["content/**"] }
+      : null,
   },
 });
