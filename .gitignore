@@ -24,7 +24,9 @@
 !.yarn/versions
 .pnp.*
 node_modules
+
 dist
+public/fonts
 src/lib/generated
 .env*
 *.tsbuildinfo
