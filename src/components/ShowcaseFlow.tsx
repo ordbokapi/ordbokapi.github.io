@@ -197,16 +197,16 @@ export default function ShowcaseFlow() {
   let sectionRef!: HTMLElement;
 
   onMount(() => {
-    if (typeof IntersectionObserver === "undefined") {
-      sectionRef
-        .querySelectorAll(`.${styles.showcase}`)
-        .forEach((el) => el.classList.add(styles.visible));
-      sectionRef
-        .querySelectorAll(`.${styles.resultCol}`)
-        .forEach((el) => el.classList.add(styles.revealed));
+    const showcaseEls = sectionRef.querySelectorAll(`.${styles.showcase}`);
+    const resultEls = sectionRef.querySelectorAll(`.${styles.resultCol}`);
 
+    if (typeof IntersectionObserver === "undefined") {
+      showcaseEls.forEach((el) => el.classList.add(styles.visible));
+      resultEls.forEach((el) => el.classList.add(styles.revealed));
       return;
     }
+
+    showcaseEls.forEach((el) => el.classList.add(styles.animated));
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -232,13 +232,8 @@ export default function ShowcaseFlow() {
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
     );
 
-    sectionRef
-      .querySelectorAll(`.${styles.showcase}`)
-      .forEach((el) => observer.observe(el));
-
-    sectionRef
-      .querySelectorAll(`.${styles.resultCol}`)
-      .forEach((el) => resultObserver.observe(el));
+    showcaseEls.forEach((el) => observer.observe(el));
+    resultEls.forEach((el) => resultObserver.observe(el));
 
     onCleanup(() => {
       observer.disconnect();

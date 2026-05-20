@@ -32,15 +32,18 @@
   align-items: start;
   padding: 48px 0;
   border-bottom: 1px solid var(--border-subtle);
+}
+
+.showcase:last-child {
+  border-bottom: none;
+}
+
+.showcase.animated {
   opacity: 0;
   transform: translateY(32px);
   transition:
     opacity 0.6s ease,
     transform 0.6s ease;
-}
-
-.showcase:last-child {
-  border-bottom: none;
 }
 
 .showcase.visible {
@@ -170,7 +173,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .showcase {
+  .showcase.animated {
     opacity: 1;
     transform: none;
     transition: none;
