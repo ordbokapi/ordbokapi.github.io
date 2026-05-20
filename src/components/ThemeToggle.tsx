@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-import { createSignal, createEffect, onCleanup, Show } from "solid-js";
+import { createSignal, createEffect, onMount, onCleanup, Show } from "solid-js";
 import Sun from "lucide-solid/icons/sun";
 import Moon from "lucide-solid/icons/moon";
 
@@ -42,6 +42,9 @@ function getStoredTheme(): Theme {
 
 export function ThemeToggle() {
   const [theme, setTheme] = createSignal<Theme>(getStoredTheme());
+  const [mounted, setMounted] = createSignal(false);
+
+  onMount(() => setMounted(true));
 
   createEffect(() => {
     const t = theme();
@@ -95,6 +98,10 @@ export function ThemeToggle() {
   };
 
   const isDark = () => {
+    if (!mounted()) {
+      return false;
+    }
+
     const t = theme();
     const resolved = t === "system" ? getSystemTheme() : t;
 
