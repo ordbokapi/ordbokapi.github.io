@@ -24,7 +24,6 @@
   z-index: 1000;
   background: var(--nav-bg);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--nav-border);
   height: var(--nav-height);
   transition: box-shadow var(--transition-normal);
@@ -115,7 +114,6 @@
   right: 0;
   background: var(--nav-bg);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
   z-index: 999;
   display: grid;
