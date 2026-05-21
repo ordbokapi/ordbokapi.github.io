@@ -22,14 +22,38 @@ import { resolve } from "path";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
+import rehypeKatex from "rehype-katex";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { renderD2 } from "./d2-render.mts";
 import rehypeShiki from "@shikijs/rehype";
 import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
 import imageSize from "image-size";
 import { load as loadYaml } from "js-yaml";
 import { parseFrontmatter, postsDir, publicDir } from "./lib.mts";
+import rehypeAlerts from "./rehype-alerts.mts";
+import rehypeFigure from "./rehype-figure.mts";
+
+function remarkPreserveMeta() {
+  return (tree: Parameters<ReturnType<typeof rehypeRaw>>[0]) => {
+    visit(
+      tree,
+      "code",
+      (node: { meta?: string; data?: Record<string, unknown> }) => {
+        if (node.meta) {
+          node.data ??= {};
+          node.data.hProperties ??= {};
+          (node.data.hProperties as Record<string, unknown>).dataMeta =
+            node.meta;
+        }
+      },
+    );
+  };
+}
 
 const virtualId = "virtual:blog-content";
 const resolvedId = "\0" + virtualId;
@@ -93,7 +117,11 @@ function rehypeImageSize() {
 
     visit(tree, "element", (node) => {
       if (node.tagName === "img") {
-        imgNodes.push(node as unknown as (typeof imgNodes)[number]);
+        const n = node as unknown as (typeof imgNodes)[number];
+        const existing = n.properties.className;
+
+        n.properties.className = existing ? `${existing} zoomable` : "zoomable";
+        imgNodes.push(n);
       }
     });
 
@@ -143,12 +171,98 @@ async function getFeaturedImageSize(
   }
 }
 
-async function processMarkdown(content: string): Promise<string> {
+function rehypeD2({ optimize = false } = {}) {
+  return async (tree: Parameters<ReturnType<typeof rehypeRaw>>[0]) => {
+    const codeBlocks: Array<{
+      node: {
+        type: string;
+        tagName: string;
+        properties: Record<string, unknown>;
+        children: Array<{
+          type: string;
+          value?: string;
+          tagName?: string;
+          properties?: Record<string, unknown>;
+          children?: Array<{ value?: string }>;
+        }>;
+      };
+      parent: { children: Array<unknown> };
+      index: number;
+    }> = [];
+
+    visit(tree, "element", (node, index, parent) => {
+      if (
+        node.tagName === "pre" &&
+        node.children?.length === 1 &&
+        (node.children[0] as { tagName?: string }).tagName === "code"
+      ) {
+        const code = node.children[0] as {
+          properties?: { className?: string[] };
+          children?: Array<{ value?: string }>;
+        };
+        const classes = code.properties?.className ?? [];
+        if (classes.includes("language-d2")) {
+          codeBlocks.push({
+            node: node as unknown as (typeof codeBlocks)[number]["node"],
+            parent: parent as unknown as (typeof codeBlocks)[number]["parent"],
+            index: index!,
+          });
+        }
+      }
+    });
+
+    await Promise.all(
+      codeBlocks.map(async ({ node, parent, index }) => {
+        const code = node.children[0];
+        const source = code.children?.map((c) => c.value ?? "").join("") ?? "";
+        const meta = (code.properties?.dataMeta as string) ?? "";
+        const titleMatch = meta.match(/title=(?:"([^"]+)"|(\S+))/);
+        const title = titleMatch?.[1] ?? titleMatch?.[2];
+
+        try {
+          const svg = await renderD2(source, { optimize });
+          const diagram = `<div class="d2-diagram zoomable" tabindex="0" role="button" aria-label="${title ? title.replace(/"/g, "&quot;") + ": t" : "Diagram: t"}rykk for å opne i fullskjerm">${svg}</div>`;
+
+          if (title) {
+            parent.children[index] = {
+              type: "raw",
+              value: `<figure>${diagram}<figcaption>${title}</figcaption></figure>`,
+            };
+          } else {
+            parent.children[index] = {
+              type: "raw",
+              value: diagram,
+            };
+          }
+        } catch {}
+      }),
+    );
+  };
+}
+
+async function processMarkdown(
+  content: string,
+  { isBuild = false } = {},
+): Promise<string> {
   const result = await unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkMath)
+    .use(remarkPreserveMeta)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
+    .use(rehypeKatex)
+    .use(rehypeAlerts)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, {
+      behavior: "append",
+      properties: {
+        className: ["heading-anchor"],
+        ariaLabel: "Lenkje til seksjon",
+      },
+    })
+    .use(rehypeFigure)
+    .use(rehypeD2, { optimize: isBuild })
     .use(rehypeImageSize)
     .use(rehypeShiki, {
       themes: { light: "github-light", dark: "github-dark" },
@@ -161,13 +275,13 @@ async function processMarkdown(content: string): Promise<string> {
         },
       ],
     })
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
   return String(result);
 }
 
-async function loadPosts(includeDrafts: boolean) {
+async function loadPosts(includeDrafts: boolean, isBuild: boolean) {
   let files;
 
   try {
@@ -194,7 +308,7 @@ async function loadPosts(includeDrafts: boolean) {
 
     const slug = extractSlug(file);
     const date = parsePlainDate(file, frontmatter.date);
-    const html = await processMarkdown(content);
+    const html = await processMarkdown(content, { isBuild });
 
     const fileDate = file.match(/^(\d{4})-(\d{2})-(\d{2})-/);
     const datePath = fileDate
@@ -298,7 +412,7 @@ export default function blogContentPlugin(): Plugin {
       }
 
       const [posts, authors] = await Promise.all([
-        loadPosts(!isBuild),
+        loadPosts(!isBuild, isBuild),
         loadAuthors(),
       ]);
       const stripHtml = isBuild && !options?.ssr;

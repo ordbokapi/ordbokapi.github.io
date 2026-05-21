@@ -40,3 +40,8 @@ SPDX-License-Identifier = "LicenseRef-Pexels-May-2026"
 path = "public/blogg/**"
 SPDX-FileCopyrightText = "Copyright (C) 2024 Adaline Simonian"
 SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+[[annotations]]
+path = "plugins/fonts/**"
+SPDX-FileCopyrightText = "Copyright (c) 2017 IBM Corp. with Reserved Font Name \"Plex\""
+SPDX-License-Identifier = "OFL-1.1"

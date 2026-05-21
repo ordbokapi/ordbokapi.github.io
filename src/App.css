@@ -113,6 +113,9 @@
   --nav-bg: rgba(255, 255, 255, 0.85);
   --nav-border: var(--border-subtle);
   --color-error: #d64545;
+  --color-success: #28a745;
+  --color-warning: #d29922;
+  --color-important: #8957e5;
   --code-keyword: #0550ae;
   --code-string: #0a3069;
   --code-attr: #6639ba;
@@ -141,6 +144,9 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
     --color-error: #f87171;
+    --color-success: #3fb950;
+    --color-warning: #d29922;
+    --color-important: #a371f7;
     --nav-bg: rgba(15, 20, 25, 0.85);
     --nav-border: var(--border);
     --code-keyword: #79c0ff;
@@ -172,6 +178,9 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
   --color-error: #f87171;
+  --color-success: #3fb950;
+  --color-warning: #d29922;
+  --color-important: #a371f7;
   --nav-bg: rgba(15, 20, 25, 0.85);
   --nav-border: var(--border);
   --code-keyword: #79c0ff;
@@ -348,4 +357,36 @@ code {
   color: var(--text-muted);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-relaxed);
+}
+
+svg.d2-svg {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
+  font-size-adjust: none;
+  font-kerning: auto;
+  font-feature-settings: normal;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  word-spacing: normal;
+  line-height: normal;
+  text-rendering: auto;
+}
+
+.d2-svg .text-bold {
+  font-weight: 700;
+}
+
+.d2-svg .text-semibold {
+  font-weight: 600;
+}
+
+.d2-svg .text-italic {
+  font-style: italic;
+}
+
+.d2-svg .text {
+  font-weight: 400;
 }

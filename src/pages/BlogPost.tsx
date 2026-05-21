@@ -16,9 +16,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-import { Show, For } from "solid-js";
+import { Show, For, onMount } from "solid-js";
 import { NoHydration } from "solid-js/web";
 import type { BlogPost, Author } from "virtual:blog-content";
+import { setupLightbox } from "../lightbox";
+import "katex/dist/katex.min.css";
+import "virtual:blog-icons.css";
 import styles from "./blog-post.module.css";
 
 interface Props {
@@ -27,9 +30,15 @@ interface Props {
 }
 
 export default function BlogPostPage(props: Props) {
+  let articleRef!: HTMLElement;
+
+  onMount(() => {
+    setupLightbox(articleRef);
+  });
+
   return (
-    <NoHydration>
-      <article class={styles.page}>
+    <article ref={articleRef} class={styles.page}>
+      <NoHydration>
         <header class={styles.header}>
           <Show when={props.post.draft}>
             <span class={styles.draftBadge}>Utkast</span>
@@ -67,7 +76,7 @@ export default function BlogPostPage(props: Props) {
             <img
               src={url()}
               alt=""
-              class={styles.featuredImage}
+              class={`${styles.featuredImage} zoomable`}
               loading="eager"
               width={props.post.imageWidth ?? undefined}
               height={props.post.imageHeight ?? undefined}
@@ -125,7 +134,7 @@ export default function BlogPostPage(props: Props) {
             .
           </p>
         </footer>
-      </article>
-    </NoHydration>
+      </NoHydration>
+    </article>
   );
 }

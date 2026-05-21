@@ -91,6 +91,31 @@
   margin-bottom: 0.4em;
 }
 
+.content :global(.heading-anchor) {
+  margin-left: 0.3em;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.content :global(.heading-anchor)::after {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  vertical-align: middle;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  background-color: var(--text-muted);
+}
+
+.content h2:hover :global(.heading-anchor),
+.content h3:hover :global(.heading-anchor),
+.content h4:hover :global(.heading-anchor),
+.content :global(.heading-anchor):focus-visible {
+  opacity: 1;
+}
+
 .content a {
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -110,7 +135,8 @@
   color: var(--text);
 }
 
-.content blockquote {
+.content blockquote,
+.content :global(.callout) {
   border-left: 3px solid var(--primary);
   padding: 0.5em 1em;
   margin: 1.5em 0;
@@ -119,8 +145,74 @@
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
-.content blockquote p {
+.content blockquote p,
+.content :global(.callout) p {
   margin-bottom: 0;
+}
+
+.content :global(.callout) {
+  color: var(--text);
+  border-left-color: var(--border-subtle);
+}
+
+.content :global(.callout-title) {
+  font-weight: 600;
+  font-size: var(--font-size-body-sm);
+  margin-bottom: 0.25em;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.content :global(.callout-title)::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  background-color: currentColor;
+}
+
+.content :global(.callout-note) {
+  border-left-color: var(--primary);
+}
+
+.content :global(.callout-note) :global(.callout-title) {
+  color: var(--primary);
+}
+
+.content :global(.callout-tip) {
+  border-left-color: var(--color-success);
+}
+
+.content :global(.callout-tip) :global(.callout-title) {
+  color: var(--color-success);
+}
+
+.content :global(.callout-important) {
+  border-left-color: var(--color-important);
+}
+
+.content :global(.callout-important) :global(.callout-title) {
+  color: var(--color-important);
+}
+
+.content :global(.callout-warning) {
+  border-left-color: var(--color-warning);
+}
+
+.content :global(.callout-warning) :global(.callout-title) {
+  color: var(--color-warning);
+}
+
+.content :global(.callout-caution) {
+  border-left-color: var(--color-error);
+}
+
+.content :global(.callout-caution) :global(.callout-title) {
+  color: var(--color-error);
 }
 
 .content figure {

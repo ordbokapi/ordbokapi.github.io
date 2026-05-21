@@ -26,6 +26,7 @@ import sitemapPlugin from "./plugins/sitemap.mts";
 import prerenderPlugin from "./plugins/prerender.mts";
 import notFoundPlugin from "./plugins/not-found.mts";
 import scandiaFontPlugin from "./plugins/scandia-font.mts";
+import blogIconsPlugin from "./plugins/blog-icons.mts";
 
 export default defineConfig({
   appType: "mpa",
@@ -33,6 +34,7 @@ export default defineConfig({
     showcaseDataPlugin(),
     blogContentPlugin(),
     blogFeedPlugin(),
+    blogIconsPlugin(),
     sitemapPlugin(),
     solidPlugin({ ssr: true }),
     prerenderPlugin(),
