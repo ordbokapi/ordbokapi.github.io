@@ -24,6 +24,7 @@ import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
+import rehypeShiki from "@shikijs/rehype";
 import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
 import imageSize from "image-size";
@@ -149,6 +150,17 @@ async function processMarkdown(content: string): Promise<string> {
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeImageSize)
+    .use(rehypeShiki, {
+      themes: { light: "github-light", dark: "github-dark" },
+      defaultColor: false,
+      transformers: [
+        {
+          pre(node) {
+            delete node.properties.tabindex;
+          },
+        },
+      ],
+    })
     .use(rehypeStringify)
     .process(content);
 
