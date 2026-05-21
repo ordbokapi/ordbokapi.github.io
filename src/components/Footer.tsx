@@ -34,7 +34,11 @@ export default function Footer() {
             Tekst og data frå ordbøkene er ©{" "}
             <a href="https://www.sprakradet.no/">Språkrådet</a> og{" "}
             <a href="https://www.uib.no/">Universitetet i Bergen</a>, henta frå{" "}
-            <a href="https://ordbokene.no/">ordbokene.no</a>.
+            <a href="https://ordbokene.no/">ordbokene.no</a>, lisensiert under{" "}
+            <a href="https://www.uib.no/ub/spesialsamlingene/182212/lisens">
+              CC BY 4.0
+            </a>
+            .
           </p>
         </div>
         <div>
@@ -65,7 +69,12 @@ export default function Footer() {
             </li>
             <li>
               <a href="https://github.com/ordbokapi/api/blob/main/COPYING">
-                Lisens (AGPL-3.0+)
+                Kodelisens (AGPL-3.0+)
+              </a>
+            </li>
+            <li>
+              <a href="https://www.uib.no/ub/spesialsamlingene/182212/lisens">
+                Datalisens (CC BY 4.0)
               </a>
             </li>
           </ul>
