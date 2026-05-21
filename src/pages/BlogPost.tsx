@@ -75,7 +75,7 @@ export default function BlogPostPage(props: Props) {
           {(url) => (
             <img
               src={url()}
-              alt=""
+              alt={props.post.imageAlt ?? ""}
               class={`${styles.featuredImage} zoomable`}
               loading="eager"
               width={props.post.imageWidth ?? undefined}

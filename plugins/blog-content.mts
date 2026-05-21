@@ -336,6 +336,7 @@ async function loadPosts(includeDrafts: boolean, isBuild: boolean) {
         : [],
       summary: frontmatter.summary ?? "",
       image: frontmatter.image ? `${assetPath}/${frontmatter.image}` : null,
+      imageAlt: frontmatter.imageAlt ?? null,
       ...(await getFeaturedImageSize(frontmatter.image, assetPath)),
       html,
     });

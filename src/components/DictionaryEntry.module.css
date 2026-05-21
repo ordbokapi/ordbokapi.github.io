@@ -328,7 +328,8 @@
 .citeLink:hover,
 .citeLink:focus-visible {
   text-decoration: underline;
-  outline: none;
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
 }
 
 .citeTooltip {

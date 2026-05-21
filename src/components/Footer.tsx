@@ -23,7 +23,7 @@ export default function Footer() {
     <footer class={styles.footer}>
       <div class={styles.inner}>
         <div class={styles.about}>
-          <p class={styles.heading}>Ordbok API</p>
+          <h2 class={styles.heading}>Ordbok API</h2>
           <p>
             Eit ope og gratis GraphQL API for norske ordbøker. Bygd og
             vedlikehalde av{" "}
@@ -38,7 +38,7 @@ export default function Footer() {
           </p>
         </div>
         <div>
-          <p class={styles.heading}>Lenkjer</p>
+          <h2 class={styles.heading}>Lenkjer</h2>
           <ul class={styles.linkList}>
             <li>
               <a href="https://api.ordbokapi.org/graphql">Apollo Sandbox</a>
@@ -58,7 +58,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <p class={styles.heading}>Meir</p>
+          <h2 class={styles.heading}>Meir</h2>
           <ul class={styles.linkList}>
             <li>
               <a href="/personvern/">Personvern</a>

@@ -83,6 +83,7 @@ export default function BlogUnsubscribe() {
       <Show when={message()}>
         {(msg) => (
           <p
+            role={msg().type === "error" ? "alert" : "status"}
             class={`${styles.message} ${msg().type === "success" ? styles.success : styles.error}`}
           >
             {msg().text}

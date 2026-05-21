@@ -28,6 +28,7 @@ declare module "virtual:blog-content" {
     categories: string[];
     summary: string;
     image: string | null;
+    imageAlt: string | null;
     imageWidth: number | null;
     imageHeight: number | null;
     html: string;

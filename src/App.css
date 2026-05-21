@@ -332,6 +332,11 @@ code {
   transform: translateY(0);
 }
 
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 .btn-primary {
   background: var(--primary);
   color: var(--text-on-primary);

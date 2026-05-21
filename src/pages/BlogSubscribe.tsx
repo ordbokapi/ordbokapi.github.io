@@ -79,11 +79,16 @@ export default function BlogSubscribe() {
         <input
           type="email"
           name="email"
+          aria-label="E-postadresse"
+          aria-describedby="email-constraint"
           placeholder="E-postadresse"
           required
           maxLength={100}
           class={styles.input}
         />
+        <p id="email-constraint" class="sr-only">
+          Maks 100 teikn
+        </p>
         <button type="submit" class="btn btn-primary" disabled={loading()}>
           Abonner
         </button>
@@ -94,6 +99,7 @@ export default function BlogSubscribe() {
       <Show when={message()}>
         {(msg) => (
           <p
+            role={msg().type === "error" ? "alert" : "status"}
             class={`${styles.message} ${msg().type === "success" ? styles.success : styles.error}`}
           >
             {msg().text}

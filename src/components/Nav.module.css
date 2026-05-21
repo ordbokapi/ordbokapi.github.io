@@ -107,6 +107,11 @@
   background: var(--primary-soft);
 }
 
+.hamburger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 .mobileMenu {
   position: fixed;
   top: var(--nav-height);
@@ -169,6 +174,11 @@
 :global(.theme-toggle:hover) {
   background: var(--primary-soft);
   border-color: var(--border);
+}
+
+:global(.theme-toggle:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {

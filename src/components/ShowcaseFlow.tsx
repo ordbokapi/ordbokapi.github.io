@@ -55,16 +55,50 @@ interface CodeTab {
 
 function TabbedCode(props: { tabs: CodeTab[] }): JSX.Element {
   const [active, setActive] = createSignal(0);
+  let tablistRef: HTMLDivElement | undefined;
+
+  function handleKeyDown(e: KeyboardEvent) {
+    const count = props.tabs.length;
+    let next = active();
+
+    if (e.key === "ArrowRight") {
+      next = (active() + 1) % count;
+    } else if (e.key === "ArrowLeft") {
+      next = (active() - 1 + count) % count;
+    } else if (e.key === "Home") {
+      next = 0;
+    } else if (e.key === "End") {
+      next = count - 1;
+    } else {
+      return;
+    }
+
+    e.preventDefault();
+    setActive(next);
+
+    const buttons =
+      tablistRef?.querySelectorAll<HTMLButtonElement>("[role=tab]");
+
+    buttons?.[next]?.focus();
+  }
 
   return (
     <div class={styles.tabbedCode}>
-      <div class={styles.tabBar} role="tablist">
+      <div
+        class={styles.tabBar}
+        role="tablist"
+        ref={tablistRef}
+        onKeyDown={handleKeyDown}
+      >
         <For each={props.tabs}>
           {(tab, i) => (
             <button
               type="button"
               role="tab"
+              id={`tab-${i()}`}
               aria-selected={i() === active()}
+              aria-controls={`tabpanel-${i()}`}
+              tabIndex={i() === active() ? 0 : -1}
               class={`${styles.tab} ${i() === active() ? styles.tabActive : ""}`}
               onClick={() => setActive(i())}
             >
@@ -77,6 +111,8 @@ function TabbedCode(props: { tabs: CodeTab[] }): JSX.Element {
         {(tab, i) => (
           <div
             role="tabpanel"
+            id={`tabpanel-${i()}`}
+            aria-labelledby={`tab-${i()}`}
             class={i() !== active() ? styles.tabPanelHidden : undefined}
           >
             <CodeBlock code={tab.code} lang={tab.lang} />
