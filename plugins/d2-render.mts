@@ -36,6 +36,18 @@ const fontSemibold = await readFile(
 
 const d2 = new D2();
 
+// Allow the process to exit even though the D2 WASM worker is still alive. The
+// bindings do not provide a documented way to shut down the worker and also do
+// not handle unref on their own, hence this hack.
+type D2WithWorkerUnref = D2 & {
+  worker: { unref(): void };
+  ready: Promise<void>;
+};
+
+(d2 as D2WithWorkerUnref).ready.then(() => {
+  (d2 as D2WithWorkerUnref).worker.unref();
+});
+
 // Work around bug upstream where concurrent requests deadlock.
 let queue: Promise<unknown> = Promise.resolve();
 
