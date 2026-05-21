@@ -108,7 +108,30 @@ export default function App() {
 
   return (
     <>
-      <a class="skip-link" href="#main-content">
+      <a
+        class="skip-link"
+        href="#main-content"
+        onClick={(e) => {
+          const target = document.getElementById("main-content");
+
+          if (!target) {
+            return;
+          }
+
+          e.preventDefault();
+          target.setAttribute("tabindex", "-1");
+          target.classList.add("skip-target-focused");
+          target.focus();
+          target.addEventListener(
+            "blur",
+            () => {
+              target.removeAttribute("tabindex");
+              target.classList.remove("skip-target-focused");
+            },
+            { once: true },
+          );
+        }}
+      >
         Hopp til hovudinnhald
       </a>
       <Nav />

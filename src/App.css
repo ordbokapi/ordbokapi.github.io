@@ -249,6 +249,10 @@ code {
   top: 8px;
 }
 
+.skip-target-focused:focus {
+  outline: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

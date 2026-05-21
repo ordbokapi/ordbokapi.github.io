@@ -60,5 +60,12 @@ export async function highlight(code: string, lang: Language): Promise<string> {
     lang,
     themes: { light: "github-light", dark: "github-dark" },
     defaultColor: false,
+    transformers: [
+      {
+        pre(node) {
+          delete node.properties.tabindex;
+        },
+      },
+    ],
   });
 }

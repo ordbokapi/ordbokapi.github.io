@@ -65,7 +65,7 @@ export default function CodeBlock(props: Props): JSX.Element {
         <NoHydration>
           <Suspense
             fallback={
-              <pre class={styles.codeBlock} tabIndex={0}>
+              <pre class={styles.codeBlock}>
                 <code>{props.code}</code>
               </pre>
             }
@@ -73,7 +73,7 @@ export default function CodeBlock(props: Props): JSX.Element {
             <Show
               when={html()}
               fallback={
-                <pre class={styles.codeBlock} tabIndex={0}>
+                <pre class={styles.codeBlock}>
                   <code>{props.code}</code>
                 </pre>
               }

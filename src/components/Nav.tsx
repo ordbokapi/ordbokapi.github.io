@@ -90,6 +90,7 @@ export default function Nav() {
         class={`${styles.mobileMenu} ${menuOpen() ? styles.open : ""}`}
         role="navigation"
         aria-label="Mobilmeny"
+        inert={!menuOpen()}
       >
         <div class={styles.mobileMenuInner}>
           {navLinks.map((link) => (

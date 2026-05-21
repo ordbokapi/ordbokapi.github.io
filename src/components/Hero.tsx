@@ -65,6 +65,8 @@ export default function Hero() {
         playsinline
         preload="none"
         poster="/images/hero-poster.jpg"
+        tabIndex={-1}
+        aria-hidden="true"
       >
         <source src="/images/hero-loop.webm" type="video/webm" />
         <source src="/images/hero-loop.mp4" type="video/mp4" />

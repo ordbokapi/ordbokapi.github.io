@@ -275,8 +275,7 @@ export default function DictionaryEntry(props: Props) {
               role="tabpanel"
               aria-roledescription="slide"
               aria-labelledby={tabId(i())}
-              tabIndex={i() === displayed() ? 0 : -1}
-              aria-hidden={i() !== displayed()}
+              inert={i() !== displayed() || undefined}
               class={`${styles.card} ${
                 i() === displayed()
                   ? showCard()
