@@ -139,35 +139,6 @@ function setupPopoverDelegation(root: HTMLElement) {
   );
 }
 
-function getShellPosition(
-  i: number,
-  active: number,
-  count: number,
-): "front" | "behind1" | "behind2" | "hidden" {
-  if (i === active) {
-    return "front";
-  }
-
-  const dist = (i - active + count) % count;
-
-  if (dist === 1) {
-    return "behind1";
-  }
-
-  if (dist === count - 1 && count > 2) {
-    return "behind2";
-  }
-
-  return "hidden";
-}
-
-const shellPosClass = {
-  front: styles.shellFront,
-  behind1: styles.shellBehind1,
-  behind2: styles.shellBehind2,
-  hidden: styles.shellHidden,
-};
-
 interface Props {
   word: string;
   labels: string[];
@@ -184,6 +155,60 @@ export default function DictionaryEntry(props: Props) {
 
   let settleTimer: number | undefined;
   const cardRefs: HTMLDivElement[] = [];
+  const shellRefs: HTMLDivElement[] = [];
+  let shellOrder = [0, 1, 2, 3];
+  let shellAnimating = false;
+  let pendingDir: "forward" | "backward" | null = null;
+  const appearDebounce = 350;
+
+  function transitionShells(dir: "forward" | "backward") {
+    const [frontIndex, b1Index, b2Index, hiddenIndex] = shellOrder;
+    const enterEl = shellRefs[hiddenIndex];
+
+    if (dir === "forward") {
+      enterEl.style.transition = "none";
+      enterEl.className = `${styles.shell} ${styles.shellHiddenBottom}`;
+      enterEl.offsetHeight;
+      enterEl.style.transition = "";
+
+      shellRefs[frontIndex].className = `${styles.shell} ${styles.shellExitUp}`;
+      shellRefs[b1Index].className = `${styles.shell} ${styles.shellFront}`;
+      shellRefs[b2Index].className = `${styles.shell} ${styles.shellBehind1}`;
+      enterEl.className = `${styles.shell} ${styles.shellBehind2}`;
+
+      shellOrder = [b1Index, b2Index, hiddenIndex, frontIndex];
+    } else {
+      enterEl.style.transition = "none";
+      enterEl.className = `${styles.shell} ${styles.shellHiddenTop}`;
+      enterEl.offsetHeight;
+      enterEl.style.transition = "";
+
+      enterEl.className = `${styles.shell} ${styles.shellFront}`;
+      shellRefs[frontIndex].className =
+        `${styles.shell} ${styles.shellBehind1}`;
+      shellRefs[b1Index].className = `${styles.shell} ${styles.shellBehind2}`;
+      shellRefs[b2Index].className = `${styles.shell} ${styles.shellExitBack}`;
+
+      shellOrder = [hiddenIndex, frontIndex, b1Index, b2Index];
+    }
+  }
+
+  function finishShellCycle() {
+    if (pendingDir !== null) {
+      const dir = pendingDir;
+
+      pendingDir = null;
+
+      transitionShells(dir);
+
+      settleTimer = window.setTimeout(finishShellCycle, appearDebounce);
+    } else {
+      shellAnimating = false;
+
+      setDisplayed(target());
+      setShowCard(true);
+    }
+  }
 
   function go(to: number) {
     if (count() <= 1) {
@@ -199,24 +224,32 @@ export default function DictionaryEntry(props: Props) {
     setTarget(to);
     setActive(to);
 
-    const currentRef = cardRefs[displayed()];
-    if (currentRef) {
-      const clone = currentRef.cloneNode(true) as HTMLElement;
-      clone.removeAttribute("id");
-      clone.classList.remove(styles.cardEnter);
-      clone.classList.add(
-        dir === "forward" ? styles.cardExit : styles.cardExitBack,
-      );
-      clone.addEventListener("animationend", () => clone.remove());
-      currentRef.parentElement!.appendChild(clone);
-    }
-    setShowCard(false);
+    if (showCard()) {
+      const currentRef = cardRefs[displayed()];
+      if (currentRef) {
+        const clone = currentRef.cloneNode(true) as HTMLElement;
 
-    clearTimeout(settleTimer);
-    settleTimer = window.setTimeout(() => {
-      setDisplayed(target());
-      setShowCard(true);
-    }, 300);
+        clone.removeAttribute("id");
+        clone.classList.remove(styles.cardEnter);
+        clone.classList.add(
+          dir === "forward" ? styles.cardExit : styles.cardExitBack,
+        );
+        clone.addEventListener("animationend", () => clone.remove());
+        currentRef.parentElement!.appendChild(clone);
+      }
+      setShowCard(false);
+    }
+
+    if (!shellAnimating) {
+      shellAnimating = true;
+
+      clearTimeout(settleTimer);
+      transitionShells(dir);
+
+      settleTimer = window.setTimeout(finishShellCycle, appearDebounce);
+    } else {
+      pendingDir = dir;
+    }
   }
 
   function next() {
@@ -257,13 +290,32 @@ export default function DictionaryEntry(props: Props) {
       aria-label={`Ordbok-oppslag for ${props.word}`}
     >
       <div class={styles.deck} aria-live="polite" aria-atomic="false">
-        <For each={props.labels}>
-          {(_, i) => (
-            <div
-              class={`${styles.shell} ${shellPosClass[getShellPosition(i(), active(), count())]}`}
-            />
-          )}
-        </For>
+        <NoHydration>
+          <div
+            ref={(el) => {
+              shellRefs[0] = el;
+            }}
+            class={`${styles.shell} ${styles.shellFront}`}
+          />
+          <div
+            ref={(el) => {
+              shellRefs[1] = el;
+            }}
+            class={`${styles.shell} ${styles.shellBehind1}`}
+          />
+          <div
+            ref={(el) => {
+              shellRefs[2] = el;
+            }}
+            class={`${styles.shell} ${styles.shellBehind2}`}
+          />
+          <div
+            ref={(el) => {
+              shellRefs[3] = el;
+            }}
+            class={`${styles.shell} ${styles.shellHiddenBottom}`}
+          />
+        </NoHydration>
 
         <For each={props.labels}>
           {(_, i) => (
