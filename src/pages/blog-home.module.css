@@ -136,6 +136,16 @@
   margin-bottom: 12px;
 }
 
+.postCardMetaText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.postCardSeparator {
+  color: var(--border);
+}
+
 .postCardSummary {
   color: var(--text-muted);
   font-size: 0.95rem;
@@ -154,4 +164,27 @@
 .licence {
   composes: licence from "./blog.module.css";
   text-align: center;
+}
+
+@media (max-width: 480px) {
+  .intro {
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 32px;
+  }
+
+  .actions {
+    margin-left: auto;
+    padding-top: 0;
+  }
+
+  .postCardMetaText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .postCardSeparator {
+    display: none;
+  }
 }

@@ -45,19 +45,21 @@ export default function BlogPostPage(props: Props) {
                 height="40"
               />
             </Show>
-            <Show when={props.author}>
-              <span>
-                <span class={styles.authorName}>{props.author!.name}</span>
-                <Show when={props.author!.pronouns}>
-                  {" "}
-                  <span class={styles.pronouns}>
-                    ({props.author!.pronouns})
-                  </span>
-                </Show>
-              </span>
-              <span class={styles.separator}>|</span>
-            </Show>
-            <time dateTime={props.post.date}>{props.post.dateFormatted}</time>
+            <div class={styles.metaText}>
+              <Show when={props.author}>
+                <span>
+                  <span class={styles.authorName}>{props.author!.name}</span>
+                  <Show when={props.author!.pronouns}>
+                    {" "}
+                    <span class={styles.pronouns}>
+                      ({props.author!.pronouns})
+                    </span>
+                  </Show>
+                </span>
+                <span class={styles.separator}>|</span>
+              </Show>
+              <time dateTime={props.post.date}>{props.post.dateFormatted}</time>
+            </div>
           </div>
         </header>
         <Show when={props.post.image}>

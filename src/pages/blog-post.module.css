@@ -36,6 +36,12 @@
   gap: 12px;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+.metaText {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -219,4 +225,16 @@
   composes: licence from "./blog.module.css";
   padding-top: 24px;
   border-top: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 480px) {
+  .metaText {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .separator {
+    display: none;
+  }
 }

@@ -88,18 +88,22 @@ export default function BlogHome(props: Props) {
                             height="24"
                           />
                         </Show>
-                        <span>
-                          {author!.name}
-                          <Show when={author!.pronouns}>
-                            {" "}
-                            <span class={styles.postCardPronouns}>
-                              ({author!.pronouns})
-                            </span>
-                          </Show>
-                        </span>
-                        <span>|</span>
                       </Show>
-                      <time dateTime={post.date}>{post.dateFormatted}</time>
+                      <div class={styles.postCardMetaText}>
+                        <Show when={author}>
+                          <span>
+                            {author!.name}
+                            <Show when={author!.pronouns}>
+                              {" "}
+                              <span class={styles.postCardPronouns}>
+                                ({author!.pronouns})
+                              </span>
+                            </Show>
+                          </span>
+                          <span class={styles.postCardSeparator}>|</span>
+                        </Show>
+                        <time dateTime={post.date}>{post.dateFormatted}</time>
+                      </div>
                     </div>
                     <Show when={post.summary}>
                       <p class={styles.postCardSummary}>{post.summary}</p>
