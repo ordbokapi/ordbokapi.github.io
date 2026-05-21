@@ -73,7 +73,7 @@ export default function BlogSubscribe() {
       <p class={styles.lead}>
         Viss du vil abonnere på blogg&shy;oppdateringar, skriv du inn
         e-post&shy;adressa di her og trykkjer på «Abonner». Du vil få eit
-        e-postvarsel når nye innlegg vert publiserte.
+        e-post&shy;varsel når nye innlegg vert publiserte.
       </p>
       <form class={styles.form} onSubmit={handleSubmit}>
         <input
@@ -111,30 +111,13 @@ export default function BlogSubscribe() {
 
       <div class={styles.privacy}>
         <p>
-          Me tek personvernet ditt på alvor. Me sporar ingenting om deg, og
-          ingen informasjon om deg vert delt med andre. Me brukar berre
-          e-post&shy;adressa di til å sende deg oppdaterings&shy;meldingar. Det
-          er alt.
-        </p>
-        <p>
           Du kan når som helst avslutte abonnementet ved å trykkje på
-          avmeldings&shy;lenkja i e-postane du får. E-post&shy;adressene vert
-          lagra i ein kryptert database, og me slettar dei med ein gong når du
-          avsluttar abonnementet. Alle loggar vert automatisk sletta etter 30
-          dagar.
+          avmeldings&shy;lenkja i e-postane du får. E-post&shy;adressa di vert
+          då sletta.
         </p>
         <p>
-          E-post vert sendt med{" "}
-          <a href="https://github.com/ordbokapi/mailer">
-            vår eigen tenar med open kjelde&shy;kode
-          </a>{" "}
-          som me har kontroll over, og me brukar{" "}
-          <a href="https://proton.me/legal/privacy">ProtonMail</a> som
-          e-postleverandør.{" "}
-          <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a>{" "}
-          vert bruka for å verne mot DDoS-angrep og for å betre ytinga til
-          nett&shy;staden. Me har inga tilknyting til andre tredje&shy;partar
-          som kan få tilgang til e-post&shy;adressene dine.
+          Les meir om korleis me handsamar data i{" "}
+          <a href="/personvern/">personvern&shy;erklæringa vår</a>.
         </p>
       </div>
     </div>

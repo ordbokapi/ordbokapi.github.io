@@ -23,7 +23,7 @@ export default function Personvern() {
     <>
       <div class={styles.page}>
         <h1>Personvern</h1>
-        <p class={styles.updated}>Sist oppdatert: 20 mai 2026</p>
+        <p class={styles.updated}>Sist oppdatert: 21 mai 2026</p>
 
         <h2>Kva data samlar me inn?</h2>
         <p>
@@ -44,17 +44,17 @@ export default function Personvern() {
         </ul>
         <p>
           Utover dette samlar me ikkje inn person&shy;opplysningar. Me sel ikkje
-          data til tredjepartar, og me brukar ikkje dataa til
+          data til tredje&shy;partar, og me brukar ikkje dataa til
           marknads&shy;føring eller profilering.
         </p>
 
         <h3>Tenesteloggar</h3>
         <p>
           Når du sender førespurnader til API-et, loggar tenaren IP-adressa di
-          saman med teknisk førespurnads&shy;data, til dømes tidspunkt,
-          endepunkt og status&shy;kode. Dette skjer for alle som brukar API-et,
-          og er naudsynt for å overvaka tenesta og hindre misbruk. Behandlinga
-          skjer med grunnlag i legitim interesse, jf.{" "}
+          saman med teknisk førespurnads&shy;data, til dømes tids&shy;punkt,
+          ende&shy;punkt og status&shy;kode. Dette skjer for alle som brukar
+          API-et, og er naudsynt for å overvaka tenesta og hindre misbruk.
+          Behandlinga skjer med grunnlag i legitim interesse, jf.{" "}
           <a href="https://lovdata.no/lov/2018-06-15-38/gdpr/a6">
             GDPR artikkel 6(1)(f)
           </a>
@@ -80,9 +80,8 @@ export default function Personvern() {
           <a href="https://lovdata.no/lov/2018-06-15-38/gdpr/a6">
             GDPR artikkel 6(1)(a)
           </a>
-          . Du kan når som helst{" "}
-          <a href="/blogg/avslutt/">avslutte abonnementet</a>, og
-          e-post&shy;adressa di vert då sletta.
+          . Du kan når som helst avslutte abonnementet (sjå{" "}
+          <a href="#rettane-dine">rettane dine</a> nedanfor).
         </p>
 
         <h3>Informasjonskapslar</h3>
@@ -96,7 +95,7 @@ export default function Personvern() {
         <p>Denne nettstaden lastar inn ressursar frå:</p>
         <ul>
           <li>
-            <strong>Cloudflare</strong>: API-et og denne nettstaden nyttar
+            <strong>Cloudflare</strong>: API-et og denne nett&shy;staden nyttar
             Cloudflare som proxy for tryggleik og ytings&shy;optimalisering.
             Cloudflare kan lagre teknisk informasjon i samsvar med{" "}
             <a href="https://www.cloudflare.com/privacypolicy/">
@@ -123,21 +122,24 @@ export default function Personvern() {
           </li>
         </ul>
 
-        <h2>Rettane dine</h2>
+        <h2 id="rettane-dine">Rettane dine</h2>
         <p>
           Du har rett til å bede om innsyn i, retting av eller sletting av data
-          me har om deg. Sidan loggdata vert automatisk overskrive, kan det
-          hende at dataa alt er sletta når du tek kontakt.
+          me har om deg. Sidan logg&shy;data vert automatisk over&shy;skrive,
+          kan det hende at dataa alt er sletta når du tek kontakt.
         </p>
         <p>
-          For e-post&shy;abonnement kan du avslutte abonnementet når som helst
-          ved å trykkje på avmeldings&shy;lenkja i e-postane du får.
+          For e-post&shy;abonnement kan du når som helst{" "}
+          <a href="/blogg/avslutt/">avslutte abonnementet</a> ved å trykkje på
+          avmeldings&shy;lenkja i e-postane du får. E-post&shy;adressa di vert
+          då sletta frå databasen vår. Ho kan likevel finnast i
+          teneste&shy;loggar til desse vert over&shy;skrivne.
         </p>
 
         <h2>Kontakt</h2>
         <p>
           Adaline Simonian er behandlings&shy;ansvarleg for denne tenesta. For
-          spørsmål om personvern, tak kontakt via{" "}
+          spørsmål om person&shy;vern, tak kontakt via{" "}
           <a href="https://github.com/ordbokapi/api">GitHub</a>.
         </p>
       </div>
