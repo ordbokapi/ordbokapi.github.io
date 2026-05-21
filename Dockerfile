@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-FROM node:26.1.0-alpine AS build
+FROM node:26.2.0-alpine AS build
 
 WORKDIR /app
 

@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "yarn@4.15.0",
   "volta": {
-    "node": "26.1.0",
+    "node": "26.2.0",
     "yarn": "4.15.0"
   },
   "scripts": {
