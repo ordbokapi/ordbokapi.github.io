@@ -279,7 +279,15 @@ export default function DictionaryEntry(props: Props) {
   const panelId = (i: number) => `dict-panel-${i}`;
 
   let stackRef!: HTMLDivElement;
-  onMount(() => setupPopoverDelegation(stackRef));
+  let deckRef!: HTMLDivElement;
+
+  onMount(() => {
+    setupPopoverDelegation(stackRef);
+
+    for (let i = 0; i < 4; i++) {
+      shellRefs[i] = deckRef.children[i] as HTMLDivElement;
+    }
+  });
 
   return (
     <div
@@ -289,32 +297,17 @@ export default function DictionaryEntry(props: Props) {
       aria-roledescription="carousel"
       aria-label={`Ordbok-oppslag for ${props.word}`}
     >
-      <div class={styles.deck} aria-live="polite" aria-atomic="false">
+      <div
+        ref={deckRef}
+        class={styles.deck}
+        aria-live="polite"
+        aria-atomic="false"
+      >
         <NoHydration>
-          <div
-            ref={(el) => {
-              shellRefs[0] = el;
-            }}
-            class={`${styles.shell} ${styles.shellFront}`}
-          />
-          <div
-            ref={(el) => {
-              shellRefs[1] = el;
-            }}
-            class={`${styles.shell} ${styles.shellBehind1}`}
-          />
-          <div
-            ref={(el) => {
-              shellRefs[2] = el;
-            }}
-            class={`${styles.shell} ${styles.shellBehind2}`}
-          />
-          <div
-            ref={(el) => {
-              shellRefs[3] = el;
-            }}
-            class={`${styles.shell} ${styles.shellHiddenBottom}`}
-          />
+          <div class={`${styles.shell} ${styles.shellFront}`} />
+          <div class={`${styles.shell} ${styles.shellBehind1}`} />
+          <div class={`${styles.shell} ${styles.shellBehind2}`} />
+          <div class={`${styles.shell} ${styles.shellHiddenBottom}`} />
         </NoHydration>
 
         <For each={props.labels}>
