@@ -19,7 +19,7 @@
  */
 
 .section {
-  padding: 40px 24px;
+  padding: 40px var(--space-page-x);
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -28,9 +28,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
-  gap: 32px;
+  gap: var(--space-lg);
   align-items: start;
-  padding: 48px 0;
+  padding: var(--space-xl) 0;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -70,7 +70,7 @@
 .queryCol {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-sm);
   min-width: 0;
 }
 
@@ -82,11 +82,11 @@
 .tryLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-caption);
   font-weight: 600;
   color: var(--primary);
-  margin-top: 12px;
+  margin-top: var(--space-sm);
 }
 
 .tryLink:hover {
@@ -96,7 +96,7 @@
 .fullData {
   grid-column: 1 / -1;
   order: 99;
-  margin-top: 8px;
+  margin-top: var(--space-xs);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   min-width: 0;
@@ -105,9 +105,9 @@
 .fullDataSummary {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  font-size: 0.88rem;
+  gap: var(--space-2xs);
+  padding: 10px var(--space-md);
+  font-size: var(--font-size-caption);
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
@@ -147,8 +147,8 @@
 .fullDataContent {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 0 16px 16px;
+  gap: var(--space-sm);
+  padding: 0 var(--space-md) var(--space-md);
   min-width: 0;
 }
 
@@ -188,10 +188,10 @@
 
 .resultCol [role="listitem"] {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(var(--space-xs));
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity var(--transition-slow),
+    transform var(--transition-slow);
 }
 
 .resultCol.revealed [role="listitem"] {
@@ -371,12 +371,12 @@
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
-  padding: 6px 12px;
+  padding: var(--space-2xs) var(--space-sm);
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .tab:hover {

@@ -21,14 +21,14 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 100px 24px 80px;
+  padding: 100px var(--space-page-x) var(--space-section);
   text-align: center;
   background: var(--bg);
 }
 
 @media (min-width: 768px) {
   .hero {
-    padding: 140px 24px 120px;
+    padding: 140px var(--space-page-x) 120px;
   }
 }
 
@@ -57,7 +57,7 @@
 
 .title {
   font-size: clamp(2.4rem, 6vw, 3.8rem);
-  margin-bottom: 16px;
+  margin-bottom: var(--space-md);
   letter-spacing: -0.02em;
   color: var(--text);
 }
@@ -69,21 +69,21 @@
 .subtitle {
   font-size: clamp(1.05rem, 2.5vw, 1.3rem);
   color: var(--text);
-  max-width: 640px;
+  max-width: var(--max-width-narrow);
   margin: 0 auto 40px;
-  line-height: 1.7;
+  line-height: var(--line-height-relaxed);
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 64px 20px 48px;
+    padding: var(--space-page-top) 20px var(--space-xl);
   }
 
   .buttons {

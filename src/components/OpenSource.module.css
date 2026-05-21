@@ -19,20 +19,20 @@
  */
 
 .section {
-  padding: 80px 24px;
+  padding: var(--space-section) var(--space-page-x);
   max-width: var(--max-width);
   margin: 0 auto;
   text-align: center;
 }
 
 .heading {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-md);
 }
 
 .desc {
   color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  max-width: 640px;
-  margin: 0 auto 32px;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-relaxed);
+  max-width: var(--max-width-narrow);
+  margin: 0 auto var(--space-lg);
 }

@@ -19,7 +19,7 @@
  */
 
 .section {
-  padding: 80px 24px;
+  padding: var(--space-section) var(--space-page-x);
   background: var(--bg-surface);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
@@ -32,13 +32,13 @@
 
 .heading {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: var(--space-xl);
 }
 
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: var(--space-lg);
   margin-bottom: 40px;
 }
 
@@ -52,18 +52,18 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: var(--primary);
   color: var(--text-on-primary);
   font-weight: 700;
   font-size: 1.1rem;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm);
 }
 
 .stepTitle {
   font-family: var(--font-heading);
   font-size: 1rem;
-  margin-bottom: 6px;
+  margin-bottom: var(--space-2xs);
 }
 
 .step :global(.text-muted) a {
@@ -71,20 +71,20 @@
 }
 
 .codeExample {
-  max-width: 640px;
+  max-width: var(--max-width-narrow);
   margin: 0 auto;
 }
 
 @media (max-width: 768px) {
   .steps {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: var(--space-page-x);
   }
 
   .step {
     text-align: left;
     display: flex;
-    gap: 16px;
+    gap: var(--space-md);
     align-items: flex-start;
   }
 

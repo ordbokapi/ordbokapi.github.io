@@ -19,37 +19,37 @@
  */
 
 .page {
-  max-width: 720px;
+  max-width: var(--max-width-prose);
   margin: 0 auto;
-  padding: 64px 24px 80px;
+  padding: var(--space-page-top) var(--space-page-x) var(--space-section);
 }
 
 .page h1 {
-  margin-bottom: 8px;
+  margin-bottom: var(--space-xs);
 }
 
 .updated {
   color: var(--text-muted);
-  font-size: 0.88rem;
-  margin-bottom: 32px;
+  font-size: var(--font-size-caption);
+  margin-bottom: var(--space-lg);
 }
 
 .page h2 {
   margin-top: 40px;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm);
 }
 
 .page p {
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 16px;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-md);
 }
 
 .page ul {
   color: var(--text-muted);
-  line-height: 1.7;
-  padding-left: 24px;
-  margin-bottom: 16px;
+  line-height: var(--line-height-relaxed);
+  padding-left: var(--space-page-x);
+  margin-bottom: var(--space-md);
 }
 
 .page li + li {

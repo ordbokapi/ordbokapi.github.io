@@ -19,7 +19,7 @@
  */
 
 .stack {
-  max-width: 480px;
+  max-width: var(--max-width-card);
 }
 
 .deck {
@@ -36,7 +36,7 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: var(--space-page-x);
   z-index: 4;
   pointer-events: auto;
 }
@@ -65,9 +65,9 @@
   border-radius: var(--radius-lg);
   pointer-events: none;
   transition:
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.35s var(--ease-out-expo),
+    opacity 0.35s var(--ease-out-expo),
+    filter 0.35s var(--ease-out-expo);
 }
 
 .shellFront {
@@ -99,12 +99,12 @@
 }
 
 .cardExit {
-  animation: cardExit 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: cardExit var(--transition-medium) var(--ease-out-expo) forwards;
   pointer-events: none;
 }
 
 .cardExitBack {
-  animation: cardExitBack 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: cardExitBack var(--transition-slow) var(--ease-out-expo) forwards;
   pointer-events: none;
 }
 
@@ -114,7 +114,7 @@
 }
 
 .cardEnter {
-  animation: cardEnter 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: cardEnter var(--transition-medium) var(--ease-out-expo) both;
 }
 
 @keyframes cardExit {
@@ -154,8 +154,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
 }
 
 .navBtn {
@@ -165,14 +165,14 @@
   width: 32px;
   height: 32px;
   border: 1px solid var(--border-subtle);
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: var(--bg-surface);
   color: var(--text);
   font-size: 1.2rem;
   cursor: pointer;
   transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
+    background var(--transition-fast),
+    border-color var(--transition-fast);
   line-height: 1;
 }
 
@@ -193,21 +193,21 @@
 
 .dots {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2xs);
   align-items: center;
 }
 
 .dot {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   border: 1.5px solid var(--border-subtle);
   background: transparent;
   cursor: pointer;
   padding: 0;
   transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
+    background var(--transition-normal),
+    border-color var(--transition-normal);
 }
 
 .dot:focus-visible {
@@ -232,9 +232,9 @@
 
 .meta {
   color: var(--text-muted);
-  font-size: 0.88rem;
+  font-size: var(--font-size-caption);
   font-style: italic;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-md);
 }
 
 .defList {
@@ -246,7 +246,7 @@
   counter-increment: def;
   padding-left: 28px;
   position: relative;
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm);
 }
 
 .defItem::before {
@@ -255,18 +255,18 @@
   left: 0;
   font-weight: 700;
   color: var(--primary);
-  font-size: 0.9rem;
+  font-size: var(--font-size-body-sm);
 }
 
 .defText {
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-snug);
 }
 
 .example {
   color: var(--text-muted);
   font-style: italic;
-  font-size: 0.88rem;
+  font-size: var(--font-size-caption);
   margin-top: 4px;
 }
 
@@ -281,14 +281,14 @@
 .moreIndicator {
   padding-left: 28px;
   color: var(--text-muted);
-  font-size: 0.88rem;
+  font-size: var(--font-size-caption);
   font-style: italic;
 }
 
 .subDefList {
   list-style: none;
   counter-reset: subdef;
-  margin-top: 6px;
+  margin-top: var(--space-2xs);
   padding-left: 0;
 }
 
@@ -296,8 +296,8 @@
   counter-increment: subdef;
   padding-left: 24px;
   position: relative;
-  margin-bottom: 6px;
-  font-size: 0.9rem;
+  margin-bottom: var(--space-2xs);
+  font-size: var(--font-size-body-sm);
 }
 
 .subDefItem::before {
@@ -306,7 +306,7 @@
   left: 0;
   font-weight: 600;
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: var(--font-size-xs);
 }
 
 .citeWrap {
@@ -336,9 +336,9 @@
   border: 1px solid var(--border-subtle);
   background: var(--bg);
   color: var(--text);
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xs) 10px;
+  font-size: var(--font-size-2xs);
   font-style: normal;
   white-space: normal;
   max-width: min(320px, 90vw);
@@ -351,8 +351,8 @@
 }
 
 .citationList {
-  margin-top: 12px;
-  padding-top: 8px;
+  margin-top: var(--space-sm);
+  padding-top: var(--space-xs);
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -363,7 +363,7 @@
 }
 
 .citationItem {
-  font-size: 0.78rem;
+  font-size: var(--font-size-2xs);
   color: var(--text-muted);
   line-height: 1.4;
   margin-bottom: 2px;

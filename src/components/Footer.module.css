@@ -21,8 +21,8 @@
 .footer {
   border-top: 1px solid var(--border-subtle);
   background: var(--bg-surface);
-  padding: 48px 24px 32px;
-  margin-top: 80px;
+  padding: var(--space-xl) var(--space-page-x) var(--space-lg);
+  margin-top: var(--space-section);
 }
 
 .inner {
@@ -35,19 +35,19 @@
 
 .about p {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  margin-top: 8px;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-relaxed);
+  margin-top: var(--space-xs);
 }
 
 .about p + p {
-  margin-top: 12px;
+  margin-top: var(--space-sm);
 }
 
 .heading {
   font-family: var(--font-heading);
-  font-size: 0.95rem;
-  margin-bottom: 12px;
+  font-size: var(--font-size-body);
+  margin-bottom: var(--space-sm);
   color: var(--text);
 }
 
@@ -55,12 +55,12 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .linkList a {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: var(--font-size-body-sm);
 }
 
 .linkList a:hover {
@@ -69,12 +69,12 @@
 
 .bottom {
   max-width: var(--max-width);
-  margin: 32px auto 0;
-  padding-top: 24px;
+  margin: var(--space-lg) auto 0;
+  padding-top: var(--space-page-x);
   border-top: 1px solid var(--border-subtle);
   color: var(--text-muted);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
 }
 
 .bottom p + p {
@@ -84,6 +84,6 @@
 @media (max-width: 768px) {
   .inner {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: var(--space-lg);
   }
 }

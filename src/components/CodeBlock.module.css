@@ -22,11 +22,11 @@
   background: var(--bg-code);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: var(--space-md) 20px;
   overflow-x: auto;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
   color: var(--text);
   white-space: pre;
   -webkit-overflow-scrolling: touch;
@@ -41,11 +41,11 @@
   background: var(--bg-code) !important;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 16px 20px;
+  padding: var(--space-md) 20px;
   overflow-x: auto;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
   white-space: pre;
   -webkit-overflow-scrolling: touch;
   margin: 0;
@@ -83,11 +83,11 @@
 .label {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: var(--font-size-label);
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-xs);
 }
 
 .codeWrapper {
@@ -97,8 +97,8 @@
 .copyButton {
   all: unset;
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--space-xs);
+  right: var(--space-xs);
   z-index: 1;
   display: flex;
   align-items: center;
@@ -112,9 +112,9 @@
   cursor: pointer;
   opacity: 0;
   transition:
-    opacity 0.15s ease,
-    color 0.15s ease,
-    background 0.15s ease;
+    opacity var(--transition-fast),
+    color var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .codeWrapper:hover .copyButton,

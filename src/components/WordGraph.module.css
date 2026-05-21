@@ -19,14 +19,14 @@
  */
 
 .container {
-  max-width: 480px;
+  max-width: var(--max-width-card);
 }
 
 .graphWrap {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 16px;
+  padding: var(--space-md);
   overflow: hidden;
 }
 
@@ -42,7 +42,7 @@
 
 .nodeCircle {
   fill: var(--primary);
-  transition: r 0.15s ease;
+  transition: r var(--transition-fast);
 }
 
 .nodeCircle.center {

@@ -19,30 +19,30 @@
  */
 
 .section {
-  padding: 80px 24px;
+  padding: var(--space-section) var(--space-page-x);
   max-width: var(--max-width);
   margin: 0 auto;
 }
 
 .heading {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: var(--space-xl);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--space-page-x);
 }
 
 .card {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: var(--space-page-x);
   transition:
-    box-shadow 0.2s ease,
-    transform 0.15s ease;
+    box-shadow var(--transition-normal),
+    transform var(--transition-fast);
 }
 
 .card:hover {
@@ -52,15 +52,15 @@
 
 .icon {
   color: var(--primary);
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm);
   display: block;
   line-height: 1;
 }
 
 .cardTitle {
   font-family: var(--font-heading);
-  font-size: 1.05rem;
-  margin-bottom: 6px;
+  font-size: var(--font-size-body-lg);
+  margin-bottom: var(--space-2xs);
 }
 
 @media (max-width: 768px) {

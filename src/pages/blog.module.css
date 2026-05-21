@@ -19,15 +19,15 @@
  */
 
 .page {
-  max-width: 720px;
+  max-width: var(--max-width-prose);
   margin: 0 auto;
-  padding: 64px 24px 80px;
+  padding: var(--space-page-top) var(--space-page-x) var(--space-section);
 }
 
 .licence {
-  margin-top: 48px;
+  margin-top: var(--space-xl);
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
 }
 
 .licence a {

@@ -49,12 +49,47 @@
   --font-body: "IBM Plex Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "IBM Plex Mono", "Menlo", "Consolas", monospace;
 
+  --font-size-2xs: 0.78rem;
+  --font-size-xs: 0.82rem;
+  --font-size-sm: 0.85rem;
+  --font-size-caption: 0.88rem;
+  --font-size-body-sm: 0.9rem;
+  --font-size-body: 0.95rem;
+  --font-size-body-lg: 1.05rem;
+  --font-size-label: 0.75rem;
+
+  --line-height-snug: 1.5;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.7;
+
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
+  --radius-full: 50%;
+
+  --space-2xs: 6px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-page-x: 24px;
+  --space-page-top: 64px;
+  --space-section: 80px;
 
   --max-width: 1120px;
+  --max-width-prose: 720px;
+  --max-width-narrow: 640px;
+  --max-width-form: 600px;
+  --max-width-card: 480px;
+
   --nav-height: 64px;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-medium: 0.25s ease;
+  --transition-slow: 0.3s ease;
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Light mode */
   --bg: #ffffff;
@@ -169,7 +204,7 @@ body {
   font-family: var(--font-body);
   color: var(--text);
   background-color: var(--bg);
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -198,7 +233,7 @@ h3 {
 a {
   color: var(--link);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color var(--transition-fast);
 }
 
 a:hover {
@@ -236,9 +271,9 @@ code {
 .skip-link {
   position: absolute;
   top: -100%;
-  left: 16px;
+  left: var(--space-md);
   z-index: 9999;
-  padding: 8px 16px;
+  padding: var(--space-xs) var(--space-md);
   background: var(--primary);
   color: var(--text-on-primary);
   border-radius: var(--radius-sm);
@@ -275,7 +310,7 @@ code {
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color 0.15s ease,
+    background-color var(--transition-fast),
     transform 0.1s ease;
 }
 
@@ -311,6 +346,6 @@ code {
 
 .text-muted {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-relaxed);
 }

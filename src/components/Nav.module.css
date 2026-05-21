@@ -27,7 +27,7 @@
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--nav-border);
   height: var(--nav-height);
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow var(--transition-normal);
 }
 
 .nav.scrolled {
@@ -37,11 +37,11 @@
 .navInner {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--space-page-x);
   display: flex;
   align-items: center;
   height: 100%;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .logo {
@@ -76,14 +76,14 @@
 }
 
 .links a {
-  padding: 6px 12px;
+  padding: var(--space-2xs) var(--space-sm);
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
+  font-size: var(--font-size-body-sm);
   color: var(--text-muted);
   white-space: nowrap;
   transition:
-    color 0.15s ease,
-    background-color 0.15s ease;
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .links a:hover {
@@ -99,7 +99,7 @@
   color: var(--text);
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 8px;
+  padding: var(--space-xs);
   border-radius: var(--radius-sm);
   line-height: 1;
 }
@@ -121,8 +121,8 @@
   display: grid;
   grid-template-rows: 0fr;
   transition:
-    grid-template-rows 0.25s ease,
-    border-color 0.25s ease;
+    grid-template-rows var(--transition-medium),
+    border-color var(--transition-medium);
 }
 
 .mobileMenu.open {
@@ -132,20 +132,20 @@
 
 .mobileMenuInner {
   overflow: hidden;
-  padding: 0 24px;
-  transition: padding 0.25s ease;
+  padding: 0 var(--space-page-x);
+  transition: padding var(--transition-medium);
 }
 
 .mobileMenu.open .mobileMenuInner {
-  padding: 8px 24px 16px;
+  padding: var(--space-xs) var(--space-page-x) var(--space-md);
 }
 
 .mobileMenu a {
   display: block;
-  padding: 10px 12px;
+  padding: 10px var(--space-sm);
   color: var(--text-muted);
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: var(--font-size-body);
 }
 
 .mobileMenu a:hover {
@@ -159,13 +159,13 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  padding: 6px 8px;
+  padding: var(--space-2xs) var(--space-xs);
   font-size: 1rem;
   line-height: 1;
   color: var(--text);
   transition:
-    background-color 0.15s ease,
-    border-color 0.15s ease;
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 :global(.theme-toggle:hover) {

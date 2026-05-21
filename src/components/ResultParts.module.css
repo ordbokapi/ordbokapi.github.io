@@ -19,7 +19,7 @@
  */
 
 .container {
-  max-width: 480px;
+  max-width: var(--max-width-card);
 }
 
 .cards {
@@ -37,39 +37,39 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 12px 16px;
+  padding: var(--space-sm) var(--space-md);
 }
 
 .cardHead {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--space-2xs);
 }
 
 .cardTitle {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: var(--font-size-body-lg);
   color: var(--text);
 }
 
 .cardMeta {
   color: var(--text-muted);
-  font-size: 0.82rem;
+  font-size: var(--font-size-xs);
 }
 
 .cardDef {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
   margin-top: 4px;
-  line-height: 1.5;
+  line-height: var(--line-height-snug);
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
 }
 
 .chipsFade {
@@ -81,34 +81,34 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  padding: 6px 12px;
-  font-size: 0.9rem;
+  padding: var(--space-2xs) var(--space-sm);
+  font-size: var(--font-size-body-sm);
 }
 
 .chipAnnotation {
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: var(--font-size-2xs);
   margin-left: 4px;
 }
 
 .chipExtra {
   font-style: italic;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: var(--font-size-2xs);
 }
 
 .facetChips {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: var(--space-2xs);
   margin-bottom: 14px;
 }
 
 .facetChip {
   background: var(--bg-surface-alt);
   border-radius: 100px;
-  padding: 4px 12px;
-  font-size: 0.78rem;
+  padding: 4px var(--space-sm);
+  font-size: var(--font-size-2xs);
   color: var(--text-muted);
 }
 
@@ -119,6 +119,6 @@
 
 @media (max-width: 600px) {
   .card {
-    padding: 10px 12px;
+    padding: 10px var(--space-sm);
   }
 }

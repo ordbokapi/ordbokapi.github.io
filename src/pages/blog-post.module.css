@@ -27,28 +27,28 @@
 }
 
 .header h1 {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-sm);
 }
 
 .meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-sm);
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: var(--font-size-body-sm);
 }
 
 .metaText {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-sm);
   flex-wrap: wrap;
 }
 
 .avatar {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   object-fit: cover;
 }
 
@@ -59,7 +59,7 @@
 
 .pronouns {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
 }
 
 .separator {
@@ -69,12 +69,12 @@
 .featuredImage {
   width: 100%;
   border-radius: var(--radius-md);
-  margin-bottom: 32px;
+  margin-bottom: var(--space-lg);
 }
 
 .content {
   line-height: 1.8;
-  font-size: 1.05rem;
+  font-size: var(--font-size-body-lg);
 }
 
 .content p {
@@ -135,8 +135,8 @@
 
 .content figcaption {
   color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-top: 8px;
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-xs);
 }
 
 .content pre {
@@ -146,7 +146,7 @@
   padding: 1em;
   overflow-x: auto;
   margin-bottom: 1.25em;
-  font-size: 0.82rem;
+  font-size: var(--font-size-xs);
 }
 
 .content code {
@@ -178,18 +178,18 @@
 }
 
 .authorBlurb {
-  margin-top: 48px;
-  padding-top: 32px;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
   border-top: 1px solid var(--border-subtle);
   display: flex;
-  gap: 16px;
+  gap: var(--space-md);
   align-items: flex-start;
 }
 
 .blurbAvatar {
   width: 56px;
   height: 56px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -206,38 +206,38 @@
 
 .blurbPronouns {
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
 }
 
 .blurbBio {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-normal);
   margin-top: 4px;
 }
 
 .blurbSocial {
   display: flex;
-  gap: 12px;
-  margin-top: 8px;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
   list-style: none;
 }
 
 .blurbSocial a {
-  font-size: 0.85rem;
+  font-size: var(--font-size-sm);
 }
 
 .draftBadge {
   composes: draftBadge from "./blog.module.css";
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--font-size-label);
   padding: 2px 10px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-xs);
 }
 
 .licence {
   composes: licence from "./blog.module.css";
-  padding-top: 24px;
+  padding-top: var(--space-page-x);
   border-top: 1px solid var(--border-subtle);
 }
 

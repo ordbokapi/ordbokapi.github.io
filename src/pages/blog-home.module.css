@@ -26,8 +26,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 48px;
+  gap: var(--space-page-x);
+  margin-bottom: var(--space-xl);
 }
 
 .introText {
@@ -35,21 +35,21 @@
 }
 
 .intro h1 {
-  margin-bottom: 8px;
+  margin-bottom: var(--space-xs);
 }
 
 .subtitle {
   color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-normal);
 }
 
 .actions {
   display: flex;
-  gap: 12px;
+  gap: var(--space-sm);
   align-items: center;
   flex-shrink: 0;
-  padding-top: 8px;
+  padding-top: var(--space-xs);
 }
 
 .actionLink {
@@ -61,8 +61,8 @@
   border-radius: var(--radius-sm);
   color: var(--text-muted);
   transition:
-    color 0.15s ease,
-    background-color 0.15s ease;
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .actionLink:hover {
@@ -73,7 +73,7 @@
 .postList {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: var(--space-lg);
 }
 
 .postCard {
@@ -85,8 +85,8 @@
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
   text-decoration: none;
   color: inherit;
 }
@@ -105,13 +105,13 @@
 }
 
 .postCardBody {
-  padding: 24px;
+  padding: var(--space-page-x);
 }
 
 .postCardAvatar {
   width: 24px;
   height: 24px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   object-fit: cover;
 }
 
@@ -123,23 +123,23 @@
 .postCardTitle {
   font-family: var(--font-heading);
   font-size: 1.25rem;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-xs);
   color: var(--text);
 }
 
 .postCardMeta {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-xs);
   color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-bottom: 12px;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .postCardMetaText {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-xs);
 }
 
 .postCardSeparator {
@@ -148,17 +148,17 @@
 
 .postCardSummary {
   color: var(--text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
 }
 
 .draftBadge {
   composes: draftBadge from "./blog.module.css";
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--space-xs);
+  right: var(--space-xs);
   font-size: 0.7rem;
-  padding: 2px 8px;
+  padding: 2px var(--space-xs);
 }
 
 .licence {
@@ -170,7 +170,7 @@
   .intro {
     flex-wrap: wrap;
     gap: 0;
-    margin-bottom: 32px;
+    margin-bottom: var(--space-lg);
   }
 
   .actions {

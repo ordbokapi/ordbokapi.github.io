@@ -19,26 +19,26 @@
  */
 
 .page {
-  max-width: 720px;
+  max-width: var(--max-width-prose);
   margin: 0 auto;
-  padding: 120px 24px 80px;
+  padding: 120px var(--space-page-x) var(--space-section);
   text-align: center;
 }
 
 .page h1 {
   font-size: 4rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-xs);
 }
 
 .subtitle {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-md);
 }
 
 .description {
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 32px;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-lg);
 }
