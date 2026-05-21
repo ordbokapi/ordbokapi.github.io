@@ -16,38 +16,30 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-export type Language = "graphql" | "json" | "javascript";
+import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
 
-let highlighterPromise:
-  | Promise<import("shiki/core").HighlighterCore>
-  | undefined;
+export type Language = BundledLanguage;
+
+let highlighterPromise: Promise<
+  HighlighterGeneric<BundledLanguage, BundledTheme>
+> | null = null;
 
 function getHighlighter() {
   if (highlighterPromise) {
     return highlighterPromise;
   }
 
-  highlighterPromise = (async () => {
-    const [{ createHighlighterCore }, { createJavaScriptRegexEngine }] =
-      await Promise.all([
-        import("shiki/core"),
-        import("shiki/engine/javascript"),
-      ]);
-    const [graphql, json, javascript, githubLight, githubDark] =
-      await Promise.all([
-        import("shiki/langs/graphql.mjs"),
-        import("shiki/langs/json.mjs"),
-        import("shiki/langs/javascript.mjs"),
-        import("shiki/themes/github-light.mjs"),
-        import("shiki/themes/github-dark.mjs"),
-      ]);
+  const shiki = import.meta.env.SSR
+    ? import("shiki")
+    : import("shiki/bundle/web");
 
-    return createHighlighterCore({
-      themes: [githubLight.default, githubDark.default],
-      langs: [graphql.default, json.default, javascript.default],
-      engine: createJavaScriptRegexEngine(),
-    });
-  })();
+  highlighterPromise = shiki.then(({ createHighlighter }) =>
+    createHighlighter({
+      themes: ["github-light", "github-dark"],
+      langs: [],
+    }),
+  ) as Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>;
+
   return highlighterPromise;
 }
 
@@ -56,7 +48,10 @@ export async function highlight(code: string, lang: Language): Promise<string> {
     return "";
   }
 
-  return (await getHighlighter()).codeToHtml(code, {
+  const highlighter = await getHighlighter();
+  await highlighter.loadLanguage(lang);
+
+  return highlighter.codeToHtml(code, {
     lang,
     themes: { light: "github-light", dark: "github-dark" },
     defaultColor: false,
