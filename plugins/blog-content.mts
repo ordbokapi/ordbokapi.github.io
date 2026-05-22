@@ -39,6 +39,7 @@ import { parseFrontmatter, postsDir, publicDir } from "./lib.mts";
 import rehypeAlerts from "./rehype-alerts.mts";
 import rehypeFigure from "./rehype-figure.mts";
 import rehypeSandbox from "./rehype-sandbox.mts";
+import rehypeToc from "./rehype-toc.mts";
 
 function remarkPreserveMeta() {
   return (tree: Parameters<ReturnType<typeof rehypeRaw>>[0]) => {
@@ -263,6 +264,7 @@ async function processMarkdown(
         ariaLabel: "Lenkje til seksjon",
       },
     })
+    .use(rehypeToc)
     .use(rehypeFigure)
     .use(rehypeD2, { optimize: isBuild })
     .use(rehypeImageSize)
