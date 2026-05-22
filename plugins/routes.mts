@@ -20,6 +20,7 @@ import { readFile, readdir } from "fs/promises";
 import { resolve } from "path";
 import { load as loadYaml } from "js-yaml";
 import { parseFrontmatter, postsDir } from "./lib.mts";
+import { toSlug } from "../src/utils/slug.ts";
 
 const authorsFile = resolve(import.meta.dirname, "../content/data/authors.yml");
 
@@ -120,16 +121,61 @@ export async function getBlogPages() {
       title: `${data.title} | Ordbok API`,
       description: data.summary || "",
       sitemap: { changefreq: "yearly" as const, priority: 0.6 },
-      article: { date, author: authorName, image },
+      article: {
+        date,
+        updated: data.updated ?? null,
+        author: authorName,
+        image,
+      },
     });
   }
   return pages;
 }
 
+export async function getCategoryPages() {
+  let files;
+
+  try {
+    files = await readdir(postsDir);
+  } catch {
+    return [];
+  }
+
+  const categories = new Map<string, string>();
+
+  for (const file of files.filter((f) => f.endsWith(".md"))) {
+    const raw = await readFile(resolve(postsDir, file), "utf-8");
+    const { data } = parseFrontmatter(raw);
+
+    if (data.draft) {
+      continue;
+    }
+
+    const cats = data.categories
+      ? Array.isArray(data.categories)
+        ? data.categories
+        : String(data.categories).split(/\s*,\s*/)
+      : [];
+
+    for (const name of cats) {
+      const slug = toSlug(name);
+      categories.set(slug, name);
+    }
+  }
+
+  return [...categories].map(([slug, name]) => ({
+    path: `/blogg/kategori/${slug}/`,
+    title: `${name} | Ordbok API`,
+    description: `Innlegg i kategorien «${name}».`,
+    sitemap: { changefreq: "weekly" as const, priority: 0.5 },
+  }));
+}
+
 export async function getAllPages() {
   const blogPages = await getBlogPages();
+  const categoryPages = await getCategoryPages();
 
-  return [...staticPages, ...blogPages];
+  return [...staticPages, ...blogPages, ...categoryPages];
 }
 
 export function pathToOutFile(path: string): string {

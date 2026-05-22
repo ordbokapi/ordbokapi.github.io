@@ -18,7 +18,9 @@
 
 import { Show, For, onMount } from "solid-js";
 import { NoHydration } from "solid-js/web";
+import ArrowLeft from "lucide-solid/icons/arrow-left";
 import type { BlogPost, Author } from "virtual:blog-content";
+import { categoryPath } from "../categories";
 import { setupLightbox } from "../lightbox";
 import { setupCodeCopy } from "../code-copy";
 import { setupSandboxTabs } from "../sandbox-query";
@@ -44,8 +46,23 @@ export default function BlogPostPage(props: Props) {
     <article ref={articleRef} class={styles.page}>
       <NoHydration>
         <header class={styles.header}>
+          <a href="/blogg/" class={styles.backLink}>
+            <ArrowLeft size={14} aria-hidden="true" /> Utviklingsblogg
+          </a>
+          <hr />
           <Show when={props.post.draft}>
             <span class={styles.draftBadge}>Utkast</span>
+          </Show>
+          <Show when={props.post.categories.length > 0}>
+            <div class={styles.categories}>
+              <For each={props.post.categories}>
+                {(cat) => (
+                  <a href={categoryPath(cat.slug)} class={styles.categoryBadge}>
+                    {cat.name}
+                  </a>
+                )}
+              </For>
+            </div>
           </Show>
           <h1>{props.post.title}</h1>
           <div class={styles.meta}>
@@ -72,6 +89,15 @@ export default function BlogPostPage(props: Props) {
                 <span class={styles.separator}>|</span>
               </Show>
               <time dateTime={props.post.date}>{props.post.dateFormatted}</time>
+              <Show when={props.post.updatedFormatted}>
+                <span class={styles.separator}>|</span>
+                <span class={styles.updated}>
+                  Oppdatert{" "}
+                  <time dateTime={props.post.updated!}>
+                    {props.post.updatedFormatted}
+                  </time>
+                </span>
+              </Show>
             </div>
           </div>
         </header>

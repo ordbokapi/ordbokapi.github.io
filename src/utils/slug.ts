@@ -16,23 +16,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-import { resolve } from "path";
-import { execFile } from "child_process";
-
-export { toSlug } from "../src/utils/slug.ts";
-
-const root = resolve(import.meta.dirname, "..");
-
-export const postsDir = resolve(root, "content/posts");
-export const publicBlogDir = resolve(root, "public/blogg");
-export const authorsFile = resolve(root, "content/data/authors.yml");
-
-export function draftAssetsDir(slug: string): string {
-  return resolve(publicBlogDir, "drafts", slug);
-}
-
-export function openInEditor(filePath: string): void {
-  if (process.env.TERM_PROGRAM === "vscode") {
-    execFile("code", [filePath]);
-  }
+export function toSlug(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }

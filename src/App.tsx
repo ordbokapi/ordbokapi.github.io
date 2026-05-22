@@ -24,10 +24,11 @@ import Personvern from "~/pages/Personvern";
 import NotFound from "~/pages/NotFound";
 import BlogHome from "~/pages/BlogHome";
 import BlogPostPage from "~/pages/BlogPost";
+import BlogCategory from "~/pages/BlogCategory";
 import BlogSubscribe from "~/pages/BlogSubscribe";
 import BlogVerify from "~/pages/BlogVerify";
 import BlogUnsubscribe from "~/pages/BlogUnsubscribe";
-import { posts, authors } from "virtual:blog-content";
+import { posts, authors, categories } from "virtual:blog-content";
 import "@fontsource/ibm-plex-sans/400.css";
 import "@fontsource/ibm-plex-sans/400-italic.css";
 import "@fontsource/ibm-plex-sans/600.css";
@@ -42,6 +43,7 @@ type Page =
   | "not-found"
   | "blog-home"
   | "blog-post"
+  | "blog-category"
   | "blog-subscribe"
   | "blog-verify"
   | "blog-unsubscribe";
@@ -83,6 +85,7 @@ function getPage(path: string): Page {
       ["/blogg/abonner", "blog-subscribe"],
       ["/blogg/stadfest", "blog-verify"],
       ["/blogg/avslutt", "blog-unsubscribe"],
+      [(p) => p.startsWith("/blogg/kategori/"), "blog-category"],
       [(p) => p.startsWith("/blogg/"), "blog-post"],
     ],
     "not-found",
@@ -98,6 +101,24 @@ export default function App() {
     const p = post();
 
     return p?.author ? (authors[p.author] ?? null) : null;
+  };
+
+  const category = () => {
+    const p = path();
+    const match = p.match(/^\/blogg\/kategori\/([^/]+)/);
+    const slug = match?.[1] ?? null;
+
+    return slug ? (categories.find((c) => c.slug === slug) ?? null) : null;
+  };
+
+  const categoryPosts = () => {
+    const cat = category();
+
+    return cat
+      ? posts.filter(
+          (p) => !p.draft && p.categories.some((c) => c.slug === cat.slug),
+        )
+      : [];
   };
 
   onMount(() => {
@@ -143,10 +164,17 @@ export default function App() {
           <Personvern />
         </Show>
         <Show when={page() === "blog-home"}>
-          <BlogHome posts={posts} authors={authors} />
+          <BlogHome posts={posts} authors={authors} categories={categories} />
         </Show>
         <Show when={page() === "blog-post" && post()}>
           <BlogPostPage post={post()!} author={postAuthor() ?? undefined} />
+        </Show>
+        <Show when={page() === "blog-category" && category()}>
+          <BlogCategory
+            category={category()!.name}
+            posts={categoryPosts()}
+            authors={authors}
+          />
         </Show>
         <Show when={page() === "blog-subscribe"}>
           <BlogSubscribe />
@@ -158,7 +186,11 @@ export default function App() {
           <BlogUnsubscribe />
         </Show>
         <Show
-          when={page() === "not-found" || (page() === "blog-post" && !post())}
+          when={
+            page() === "not-found" ||
+            (page() === "blog-post" && !post()) ||
+            (page() === "blog-category" && !categoryPosts().length)
+          }
         >
           <NotFound />
         </Show>

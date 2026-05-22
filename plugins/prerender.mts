@@ -103,6 +103,13 @@ export default function prerenderPlugin(): Plugin {
               `<meta property="article:published_time" content="${article.date}" />\n</head>`,
             );
 
+            if (article.updated) {
+              html = html.replace(
+                "</head>",
+                `<meta property="article:modified_time" content="${article.updated}" />\n</head>`,
+              );
+            }
+
             if (article.author) {
               html = html.replace(
                 "</head>",

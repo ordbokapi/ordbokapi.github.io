@@ -19,49 +19,34 @@
  */
 
 .page {
-  max-width: var(--max-width-prose);
-  margin: 0 auto;
-  padding: var(--space-page-top) var(--space-page-x) var(--space-section);
+  composes: pageWithBackLink from "./blog.module.css";
 }
 
-.pageWithBackLink {
-  composes: page;
-  padding-top: var(--space-lg);
+.header {
+  margin-bottom: var(--space-xl);
 }
 
 .backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  text-decoration: none;
-  margin-bottom: var(--space-sm);
+  composes: backLink from "./blog.module.css";
 }
 
-.backLink:hover {
-  color: var(--primary);
+.header h1 {
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-normal);
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
 .licence {
-  margin-top: var(--space-xl);
-  color: var(--text-muted);
-  font-size: var(--font-size-sm);
-}
-
-.licence a {
-  color: var(--text-muted);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.licence a:hover {
-  color: var(--primary);
-}
-
-.draftBadge {
-  background: var(--accent);
-  color: var(--text-on-primary);
-  font-weight: 700;
-  border-radius: 4px;
+  composes: licence from "./blog.module.css";
+  text-align: center;
 }

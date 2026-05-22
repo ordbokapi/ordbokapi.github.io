@@ -36,6 +36,7 @@ import imageSize from "image-size";
 import { load as loadYaml } from "js-yaml";
 import { loadEnv } from "vite";
 import { parseFrontmatter, postsDir, publicDir } from "./lib.mts";
+import { toSlug } from "../src/utils/slug.ts";
 import rehypeAlerts from "./rehype-alerts.mts";
 import rehypeFigure from "./rehype-figure.mts";
 import rehypeSandbox from "./rehype-sandbox.mts";
@@ -330,6 +331,10 @@ async function loadPosts(
       ? `/blogg/${datePath}/${slug}`
       : `/blogg/drafts/${slug}`;
 
+    const updated = frontmatter.updated
+      ? parsePlainDate(file, frontmatter.updated)
+      : null;
+
     posts.push({
       slug,
       path,
@@ -337,12 +342,15 @@ async function loadPosts(
       title: frontmatter.title ?? slug,
       date: date.toString(),
       dateFormatted: formatDate(date),
+      updated: updated?.toString() ?? null,
+      updatedFormatted: updated ? formatDate(updated) : null,
       author: frontmatter.author ?? null,
-      categories: frontmatter.categories
+      categories: (frontmatter.categories
         ? Array.isArray(frontmatter.categories)
           ? frontmatter.categories
-          : frontmatter.categories.split(/\s+/)
-        : [],
+          : String(frontmatter.categories).split(/\s*,\s*/)
+        : []
+      ).map((name: string) => ({ name, slug: toSlug(name) })),
       summary: frontmatter.summary ?? "",
       image: frontmatter.image ? `${assetPath}/${frontmatter.image}` : null,
       imageAlt: frontmatter.imageAlt ?? null,
@@ -436,8 +444,23 @@ export default function blogContentPlugin(): Plugin {
         ? posts.map(({ html, ...rest }) => rest)
         : posts;
 
+      const categoryMap = new Map<string, string>();
+
+      for (const post of posts) {
+        if (!post.draft) {
+          for (const cat of post.categories) {
+            categoryMap.set(cat.slug, cat.name);
+          }
+        }
+      }
+      const categories = [...categoryMap].map(([slug, name]) => ({
+        name,
+        slug,
+      }));
+
       return `export const posts = ${JSON.stringify(outputPosts)};
 export const authors = ${JSON.stringify(authors)};
+export const categories = ${JSON.stringify(categories)};
 `;
     },
   };

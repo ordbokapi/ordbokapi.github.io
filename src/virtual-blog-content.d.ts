@@ -17,6 +17,11 @@
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
 declare module "virtual:blog-content" {
+  export interface Category {
+    name: string;
+    slug: string;
+  }
+
   export interface BlogPost {
     slug: string;
     path: string;
@@ -24,8 +29,10 @@ declare module "virtual:blog-content" {
     title: string;
     date: string;
     dateFormatted: string;
+    updated: string | null;
+    updatedFormatted: string | null;
     author: string | null;
-    categories: string[];
+    categories: Category[];
     summary: string;
     image: string | null;
     imageAlt: string | null;
@@ -49,4 +56,5 @@ declare module "virtual:blog-content" {
 
   export const posts: BlogPost[];
   export const authors: Record<string, Author>;
+  export const categories: Category[];
 }

@@ -27,7 +27,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-page-x);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .introText {
@@ -70,95 +70,44 @@
   background-color: var(--bg-surface);
 }
 
+.categoryNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+
+.categoryLabel {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-right: var(--space-xs);
+}
+
+.categoryPill {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-code);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.categoryPill:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  text-decoration: none;
+}
+
 .postList {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-}
-
-.postCard {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-  text-decoration: none;
-  color: inherit;
-}
-
-.postCard:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-md);
-  text-decoration: none;
-  color: inherit;
-}
-
-.postCardImage {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.postCardBody {
-  padding: var(--space-page-x);
-}
-
-.postCardAvatar {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--radius-full);
-  object-fit: cover;
-}
-
-.postCardPronouns {
-  font-size: 0.8rem;
-  font-style: italic;
-}
-
-.postCardTitle {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  margin-bottom: var(--space-xs);
-  color: var(--text);
-}
-
-.postCardMeta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  color: var(--text-muted);
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--space-sm);
-}
-
-.postCardMetaText {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.postCardSeparator {
-  color: var(--border);
-}
-
-.postCardSummary {
-  color: var(--text-muted);
-  font-size: var(--font-size-body);
-  line-height: var(--line-height-normal);
-}
-
-.draftBadge {
-  composes: draftBadge from "./blog.module.css";
-  position: absolute;
-  top: var(--space-xs);
-  right: var(--space-xs);
-  font-size: 0.7rem;
-  padding: 2px var(--space-xs);
 }
 
 .licence {
@@ -176,15 +125,5 @@
   .actions {
     margin-left: auto;
     padding-top: 0;
-  }
-
-  .postCardMetaText {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-  }
-
-  .postCardSeparator {
-    display: none;
   }
 }

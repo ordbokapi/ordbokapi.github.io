@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
 title: "Ny arkitektur, nye moglegheiter"
 date: 2026-05-22 19:04:37 +0200
 author: asimonian
-categories: nyheiter
+categories: Nyheiter
 image: post-image.jpg
 summary: "Ordbok API har fått ein ny arkitektur med PostgreSQL og Meilisearch som erstattar Redis. No kan ein filtrere på ordklasse, etymologi, heimfesting og bibliografi, og kombinere filtera fritt."
 

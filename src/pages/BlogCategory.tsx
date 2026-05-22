@@ -16,63 +16,30 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-import { For, Show } from "solid-js";
+import { For } from "solid-js";
 import { NoHydration } from "solid-js/web";
-import MailPlus from "lucide-solid/icons/mail-plus";
-import Rss from "lucide-solid/icons/rss";
-import type { BlogPost, Author, Category } from "virtual:blog-content";
-import { categoryPath } from "../categories";
+import ArrowLeft from "lucide-solid/icons/arrow-left";
+import type { BlogPost, Author } from "virtual:blog-content";
 import PostCard from "~/components/PostCard";
-import styles from "./blog-home.module.css";
+import styles from "./blog-category.module.css";
 
 interface Props {
+  category: string;
   posts: BlogPost[];
   authors: Record<string, Author>;
-  categories: Category[];
 }
 
-export default function BlogHome(props: Props) {
+export default function BlogCategory(props: Props) {
   return (
     <NoHydration>
       <div class={styles.page}>
-        <header class={styles.intro}>
-          <div class={styles.introText}>
-            <h1>Utviklingsblogg</h1>
-            <p class={styles.subtitle}>
-              Nyheiter og oppdateringar om utviklinga av Ordbok API.
-            </p>
-          </div>
-          <div class={styles.actions}>
-            <a
-              href="/blogg/abonner/"
-              class={styles.actionLink}
-              aria-label="Abonner på e-post"
-              title="Abonner på e-post"
-            >
-              <MailPlus size={22} aria-hidden="true" />
-            </a>
-            <a
-              href="/blogg/feed.xml"
-              class={styles.actionLink}
-              aria-label="RSS-straum"
-              title="RSS-straum"
-            >
-              <Rss size={22} aria-hidden="true" />
-            </a>
-          </div>
+        <header class={styles.header}>
+          <a href="/blogg/" class={styles.backLink}>
+            <ArrowLeft size={14} aria-hidden="true" /> Utviklingsblogg
+          </a>
+          <hr />
+          <h1>{props.category}</h1>
         </header>
-        <Show when={props.categories.length > 0}>
-          <nav class={styles.categoryNav} aria-label="Kategoriar">
-            <span class={styles.categoryLabel}>Kategoriar:</span>
-            <For each={props.categories}>
-              {(cat) => (
-                <a href={categoryPath(cat.slug)} class={styles.categoryPill}>
-                  {cat.name}
-                </a>
-              )}
-            </For>
-          </nav>
-        </Show>
         <div class={styles.postList}>
           <For each={props.posts}>
             {(post) => (

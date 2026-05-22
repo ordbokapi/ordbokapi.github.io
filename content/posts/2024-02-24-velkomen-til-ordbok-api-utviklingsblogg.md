@@ -9,7 +9,7 @@ title: Velkomen til Ordbok API Utviklingsblogg
 date: 2024-02-23 21:11:43 -0800
 image: post-image.png
 author: asimonian
-categories: nyheiter
+categories: Nyheiter
 summary: "I dag lanserer me bloggen for utvikling av Ordbok API. Her vil me dele nyheiter og oppdateringar om Ordbok API. Les meir om kva me har planlagt."
 
 ---
