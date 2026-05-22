@@ -187,9 +187,9 @@ Filtera kan kombinerast fritt med `and`, `or` og `not`, slik at ein kan uttrykkj
 
 Den nye versjonen av prosjektet er no lisensiert under [AGPL 3.0][agpl].
 
-Tidlegare var koden under [ISC][isc], ein svært permissiv lisens som lét ein gjera nesten kva som helst med koden utan vilkår. Men eg vil sikre at forbetringar kjem attende til fellesskapet, i staden for å forsvinne inn i proprietære system.
+Tidlegare var koden under [ISC][isc], ein svært permissiv lisens som lét ein gjera nesten kva som helst med koden utan vilkår. Men eg vil sikre at forbetringar kjem attende til felles&shy;skapet, i staden for å forsvinne inn i proprietære system.
 
-Difor har eg valt å byte til AGPL. Med AGPL må ein gjera endringane tilgjengelege under same lisens dersom ein tek koden, endrar han og køyrer han som ei teneste. Dette sikrar at forbetringar kjem attende til felles&shy;skapet, i staden for å forsvinne inn i proprietære system.
+Difor har eg valt å byte til AGPL. Med AGPL må ein gjera endringane tilgjengelege under same lisens dersom ein tek koden, endrar han og køyrer han som ei teneste.
 
 For folk som berre brukar API-et er dette uvesentleg. Denne endringa påverkar berre dei som ville køyre sin eigen modifiserte versjon av teneste&shy;koden.
 
