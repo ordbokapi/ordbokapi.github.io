@@ -51,7 +51,7 @@ jobs:
         id: detect
         run: |
           new_posts=$(git diff-tree --no-commit-id --name-status -r HEAD | \
-            grep -E '^A.*content/posts/\d{4}-\d{2}-\d{2}-.*\.md$' | \
+            grep -E '^A.*content/posts/[0-9]{4}-[0-9]{2}-[0-9]{2}-.*\.md$' | \
             awk '{print $2}')
 
           if [ -z "$new_posts" ]; then
