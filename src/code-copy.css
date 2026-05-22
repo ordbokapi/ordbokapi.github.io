@@ -1,0 +1,75 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.code-copy-wrapper {
+  position: relative;
+}
+
+.code-copy-btn {
+  all: unset;
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.code-copy-btn::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: var(--text-muted);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition: background-color var(--transition-fast);
+}
+
+.code-copy-wrapper:hover .code-copy-btn,
+.code-copy-btn:focus-visible {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background: var(--bg-hover, var(--bg-code));
+}
+
+.code-copy-btn:hover::before {
+  background-color: var(--text);
+}
+
+.code-copy-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  opacity: 1;
+}

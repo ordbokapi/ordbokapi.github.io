@@ -1,7 +1,10 @@
 query DialectWords($place: String!) {
   articles(
     dictionaries: [NorskOrdbok]
-    filter: { wordClass: Substantiv, dialectPlace: { name: { eq: $place } } }
+    filter: {
+      wordClass: { eq: Substantiv }
+      dialectPlace: { name: { eq: $place } }
+    }
   ) {
     totalCount
     edges {

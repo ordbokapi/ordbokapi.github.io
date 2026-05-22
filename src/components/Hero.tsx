@@ -23,6 +23,16 @@ export default function Hero() {
   let videoRef!: HTMLVideoElement;
 
   onMount(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    if (prefersReducedMotion.matches) {
+      videoRef.removeAttribute("autoplay");
+      videoRef.pause();
+      return;
+    }
+
     let wasPlaying = false;
 
     const observer = new IntersectionObserver(
@@ -47,10 +57,19 @@ export default function Hero() {
       }
     };
 
+    const handleMotionChange = () => {
+      if (prefersReducedMotion.matches) {
+        videoRef.pause();
+        observer.disconnect();
+      }
+    };
+
     document.addEventListener("visibilitychange", handleVisibility);
+    prefersReducedMotion.addEventListener("change", handleMotionChange);
     onCleanup(() => {
       observer.disconnect();
       document.removeEventListener("visibilitychange", handleVisibility);
+      prefersReducedMotion.removeEventListener("change", handleMotionChange);
     });
   });
 

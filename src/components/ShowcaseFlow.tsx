@@ -236,7 +236,10 @@ export default function ShowcaseFlow() {
     const showcaseEls = sectionRef.querySelectorAll(`.${styles.showcase}`);
     const resultEls = sectionRef.querySelectorAll(`.${styles.resultCol}`);
 
-    if (typeof IntersectionObserver === "undefined") {
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       showcaseEls.forEach((el) => el.classList.add(styles.visible));
       resultEls.forEach((el) => el.classList.add(styles.revealed));
       return;
@@ -271,9 +274,21 @@ export default function ShowcaseFlow() {
     showcaseEls.forEach((el) => observer.observe(el));
     resultEls.forEach((el) => resultObserver.observe(el));
 
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleMotionChange = () => {
+      if (motionQuery.matches) {
+        observer.disconnect();
+        resultObserver.disconnect();
+        showcaseEls.forEach((el) => el.classList.add(styles.visible));
+        resultEls.forEach((el) => el.classList.add(styles.revealed));
+      }
+    };
+    motionQuery.addEventListener("change", handleMotionChange);
+
     onCleanup(() => {
       observer.disconnect();
       resultObserver.disconnect();
+      motionQuery.removeEventListener("change", handleMotionChange);
     });
   });
 

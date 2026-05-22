@@ -60,8 +60,29 @@
 }
 
 .logoImg {
-  height: 36px;
+  height: 33px;
   width: auto;
+}
+
+.logoDark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme="light"])) .logoLight {
+    display: none;
+  }
+  :global(:root:not([data-theme="light"])) .logoDark {
+    display: block;
+  }
+}
+
+:global(:root[data-theme="dark"]) .logoLight {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .logoDark {
+  display: block;
 }
 
 .spacer {

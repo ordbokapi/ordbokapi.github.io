@@ -1,0 +1,95 @@
+/*
+ * SPDX-FileCopyrightText: Copyright (C) 2026 Adaline Simonian
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * This file is part of Ordbok API.
+ *
+ * Ordbok API is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * Ordbok API is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+.sandbox-query-block {
+  display: flex;
+  flex-direction: column;
+  margin: var(--space-md) 0;
+}
+
+.sandbox-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: -1px;
+}
+
+.sandbox-tab {
+  all: unset;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: var(--space-2xs) var(--space-sm);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.sandbox-tab:hover {
+  color: var(--text);
+}
+
+.sandbox-tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.sandbox-tab-active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.sandbox-query-block:has(.sandbox-tabs) pre,
+.sandbox-query-block:has(.sandbox-tabs) pre.shiki {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.sandbox-panel-hidden {
+  display: none;
+}
+
+.sandbox-try-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: var(--space-sm);
+  text-decoration: none;
+}
+
+.sandbox-try-link:hover {
+  color: var(--primary-hover);
+}
+
+.sandbox-try-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-color: currentColor;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}

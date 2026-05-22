@@ -1,7 +1,10 @@
 query NorseOriginNouns {
   articles(
     dictionaries: [Nynorskordboka]
-    filter: { wordClass: Substantiv, etymologyLanguage: Norroent }
+    filter: {
+      wordClass: { eq: Substantiv }
+      etymologyLanguage: { eq: Norroent }
+    }
     first: 50
   ) {
     totalCount

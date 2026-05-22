@@ -34,9 +34,11 @@ import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
 import imageSize from "image-size";
 import { load as loadYaml } from "js-yaml";
+import { loadEnv } from "vite";
 import { parseFrontmatter, postsDir, publicDir } from "./lib.mts";
 import rehypeAlerts from "./rehype-alerts.mts";
 import rehypeFigure from "./rehype-figure.mts";
+import rehypeSandbox from "./rehype-sandbox.mts";
 
 function remarkPreserveMeta() {
   return (tree: Parameters<ReturnType<typeof rehypeRaw>>[0]) => {
@@ -242,7 +244,7 @@ function rehypeD2({ optimize = false } = {}) {
 
 async function processMarkdown(
   content: string,
-  { isBuild = false } = {},
+  { isBuild = false, apiUrl = "https://api.ordbokapi.org/graphql" } = {},
 ): Promise<string> {
   const result = await unified()
     .use(remarkParse)
@@ -264,6 +266,7 @@ async function processMarkdown(
     .use(rehypeFigure)
     .use(rehypeD2, { optimize: isBuild })
     .use(rehypeImageSize)
+    .use(rehypeSandbox, { apiUrl })
     .use(rehypeShiki, {
       themes: { light: "github-light", dark: "github-dark" },
       defaultColor: false,
@@ -281,7 +284,11 @@ async function processMarkdown(
   return String(result);
 }
 
-async function loadPosts(includeDrafts: boolean, isBuild: boolean) {
+async function loadPosts(
+  includeDrafts: boolean,
+  isBuild: boolean,
+  apiUrl: string,
+) {
   let files;
 
   try {
@@ -308,7 +315,7 @@ async function loadPosts(includeDrafts: boolean, isBuild: boolean) {
 
     const slug = extractSlug(file);
     const date = parsePlainDate(file, frontmatter.date);
-    const html = await processMarkdown(content, { isBuild });
+    const html = await processMarkdown(content, { isBuild, apiUrl });
 
     const fileDate = file.match(/^(\d{4})-(\d{2})-(\d{2})-/);
     const datePath = fileDate
@@ -357,12 +364,18 @@ async function loadAuthors() {
 
 export default function blogContentPlugin(): Plugin {
   let isBuild = false;
+  let apiUrl = "https://api.ordbokapi.org/graphql";
 
   return {
     name: "blog-content",
 
     configResolved(config) {
       isBuild = config.command === "build" || config.appType === "custom";
+      const env = loadEnv(config.mode, config.root, "VITE_");
+      apiUrl =
+        env.VITE_API_URL ||
+        process.env.VITE_API_URL ||
+        "https://api.ordbokapi.org/graphql";
     },
 
     resolveId(id) {
@@ -413,7 +426,7 @@ export default function blogContentPlugin(): Plugin {
       }
 
       const [posts, authors] = await Promise.all([
-        loadPosts(!isBuild, isBuild),
+        loadPosts(!isBuild, isBuild, apiUrl),
         loadAuthors(),
       ]);
       const stripHtml = isBuild && !options?.ssr;

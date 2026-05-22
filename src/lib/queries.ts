@@ -50,7 +50,7 @@ export const showcaseQueries = {
   articles(
     dictionaries: [NorskOrdbok]
     filter: {
-      wordClass: Substantiv
+      wordClass: { eq: Substantiv }
       dialectPlace: { name: { eq: $place } }
     }
   ) {
@@ -77,8 +77,8 @@ export const showcaseQueries = {
   articles(
     dictionaries: [Nynorskordboka]
     filter: {
-      wordClass: Substantiv
-      etymologyLanguage: Norroent
+      wordClass: { eq: Substantiv }
+      etymologyLanguage: { eq: Norroent }
     }
   ) {
     totalCount
@@ -121,7 +121,10 @@ export const showcaseQueries = {
 }`,
     file: "search",
     variables: {
-      filter: { etymologyLanguage: "Fransk", lemma: { contains: "sj" } },
+      filter: {
+        etymologyLanguage: { eq: "Fransk" },
+        lemma: { contains: "sj" },
+      },
       dictionaries: ["Bokmaalsordboka", "Nynorskordboka"],
     },
   },

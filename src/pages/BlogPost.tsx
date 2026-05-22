@@ -20,6 +20,8 @@ import { Show, For, onMount } from "solid-js";
 import { NoHydration } from "solid-js/web";
 import type { BlogPost, Author } from "virtual:blog-content";
 import { setupLightbox } from "../lightbox";
+import { setupCodeCopy } from "../code-copy";
+import { setupSandboxTabs } from "../sandbox-query";
 import "katex/dist/katex.min.css";
 import "virtual:blog-icons.css";
 import styles from "./blog-post.module.css";
@@ -34,6 +36,8 @@ export default function BlogPostPage(props: Props) {
 
   onMount(() => {
     setupLightbox(articleRef);
+    setupCodeCopy(articleRef);
+    setupSandboxTabs(articleRef);
   });
 
   return (

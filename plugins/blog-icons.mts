@@ -29,6 +29,9 @@ const icons: Record<string, string> = {
   warning: lucide.TriangleAlert,
   caution: lucide.OctagonAlert,
   link: lucide.Link,
+  copy: lucide.Copy,
+  check: lucide.Check,
+  "arrow-right": lucide.ArrowRight,
 };
 
 function toDataUri(svg: string): string {
@@ -52,8 +55,16 @@ export default function blogIconsPlugin(): Plugin {
         return;
       }
 
+      const calloutNames = new Set([
+        "note",
+        "tip",
+        "important",
+        "warning",
+        "caution",
+      ]);
+
       const calloutRules = Object.entries(icons)
-        .filter(([name]) => name !== "link")
+        .filter(([name]) => calloutNames.has(name))
         .map(
           ([name, svg]) =>
             `.callout-${name} .callout-title::before {\n  mask-image: ${toDataUri(svg)};\n}`,
@@ -62,7 +73,11 @@ export default function blogIconsPlugin(): Plugin {
 
       const headingRule = `.heading-anchor::after {\n  mask-image: ${toDataUri(icons.link)};\n}`;
 
-      return `${calloutRules}\n\n${headingRule}\n`;
+      const codeCopyRule = `.code-copy-btn::before {\n  mask-image: ${toDataUri(icons.copy)};\n}`;
+      const codeCopiedRule = `.code-copy-btn.copied::before {\n  mask-image: ${toDataUri(icons.check)};\n}`;
+      const sandboxTryIcon = `.sandbox-try-icon {\n  mask-image: ${toDataUri(icons["arrow-right"])};\n}`;
+
+      return `${calloutRules}\n\n${headingRule}\n\n${codeCopyRule}\n\n${codeCopiedRule}\n\n${sandboxTryIcon}\n`;
     },
   };
 }

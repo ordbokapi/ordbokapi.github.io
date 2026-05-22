@@ -18,6 +18,7 @@ path = [
   "src/data/**",
   "src/lib/graphql/**",
   "src/lib/generated/**",
+  "scripts/*.svg",
 ]
 SPDX-FileCopyrightText = "Copyright (C) 2023 Adaline Simonian"
 SPDX-License-Identifier = "AGPL-3.0-or-later"

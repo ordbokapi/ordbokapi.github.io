@@ -56,11 +56,18 @@ export default function Nav() {
         <div class={styles.navInner}>
           <a href="/" class={styles.logo}>
             <img
-              src="/images/ordbokapi-logo.png"
+              src="/images/ordbokapi-logo-light.svg"
               alt=""
-              class={styles.logoImg}
+              class={`${styles.logoImg} ${styles.logoLight}`}
               width="36"
-              height="36"
+              height="33"
+            />
+            <img
+              src="/images/ordbokapi-logo-dark.svg"
+              alt=""
+              class={`${styles.logoImg} ${styles.logoDark}`}
+              width="36"
+              height="33"
             />
             Ordbok API
           </a>
