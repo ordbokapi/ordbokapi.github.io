@@ -306,6 +306,8 @@ function activateElement(el: HTMLElement) {
     if (svg) {
       const clone = svg.cloneNode(true) as SVGElement;
 
+      clone.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
       if (!clone.hasAttribute("width") || !clone.hasAttribute("height")) {
         const viewBox = clone.getAttribute("viewBox");
 
