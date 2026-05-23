@@ -99,6 +99,14 @@ along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
         "inLanguage": ["nn", "nb", "no"]
       }
     </script>
+    <script>
+      {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark" || theme === "light") {
+          document.documentElement.dataset.theme = theme;
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="app"><!--app--></div>
