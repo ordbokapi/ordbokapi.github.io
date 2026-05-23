@@ -23,6 +23,7 @@ import {
   type BundledLanguage,
   type BundledTheme,
   type HighlighterGeneric,
+  type ShikiTransformer,
 } from "shiki";
 import LZString from "lz-string";
 
@@ -33,6 +34,7 @@ type Parent = Extract<Tree | RootContent, { children: RootContent[] }>;
 
 interface Options {
   apiUrl?: string;
+  toClass?: ShikiTransformer;
 }
 
 let highlighterPromise: Promise<
@@ -117,6 +119,7 @@ function isPreWithCode(node: unknown): node is HastElement {
 
 export default function rehypeSandbox({
   apiUrl = "https://api.ordbokapi.org/graphql",
+  toClass,
 }: Options = {}) {
   return async (tree: Tree) => {
     const blocks: Array<{
@@ -189,6 +192,7 @@ export default function rehypeSandbox({
         themes: { light: "github-light", dark: "github-dark" },
         defaultColor: false,
         transformers: [
+          ...(toClass ? [toClass] : []),
           {
             pre(node) {
               delete node.properties.tabindex;
@@ -205,6 +209,7 @@ export default function rehypeSandbox({
           themes: { light: "github-light", dark: "github-dark" },
           defaultColor: false,
           transformers: [
+            ...(toClass ? [toClass] : []),
             {
               pre(node) {
                 delete node.properties.tabindex;

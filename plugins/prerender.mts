@@ -20,6 +20,7 @@ import type { Logger, Plugin } from "vite";
 import { readFile, writeFile, mkdir } from "fs/promises";
 import { resolve, dirname } from "path";
 import { createServer } from "vite";
+import { minify } from "html-minifier-terser";
 import { getAllPages, pathToOutFile, siteUrl } from "./routes.mts";
 
 export default function prerenderPlugin(): Plugin {
@@ -55,11 +56,20 @@ export default function prerenderPlugin(): Plugin {
 
         for (const page of pages) {
           const canonical = `${siteUrl}${page.path}`;
-          const { html: appHtml, hydrationScript } = await render(page.path);
+          const {
+            html: appHtml,
+            hydrationScript,
+            shikiCSS,
+          } = await render(page.path);
 
           let html = template;
 
           html = html.replace("</head>", `${hydrationScript}</head>`);
+
+          if (shikiCSS) {
+            html = html.replace("</head>", `<style>${shikiCSS}</style></head>`);
+          }
+
           html = html.replace("<!--app-->", appHtml);
           html = html.replace(
             /<title>[^<]*<\/title>/,
@@ -132,8 +142,17 @@ export default function prerenderPlugin(): Plugin {
 
           const outPath = resolve(outDir, pathToOutFile(page.path));
 
+          const minified = await minify(html, {
+            collapseWhitespace: true,
+            conservativeCollapse: true,
+            removeComments: true,
+            ignoreCustomComments: [/SPDX-/, /^[#/$!]{1,2}$/],
+            minifyCSS: true,
+            minifyJS: true,
+          });
+
           await mkdir(dirname(outPath), { recursive: true });
-          await writeFile(outPath, html);
+          await writeFile(outPath, minified);
           logger.info(`  ✓ ${page.path}`);
         }
       } finally {

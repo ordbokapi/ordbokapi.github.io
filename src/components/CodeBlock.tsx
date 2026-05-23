@@ -16,12 +16,12 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
-import { Show, createSignal, createResource, Suspense } from "solid-js";
-import type { JSX } from "solid-js";
-import { NoHydration } from "solid-js/web";
+import { Show, createSignal, createResource } from "solid-js";
+import type { Accessor, JSX } from "solid-js";
+import { isServer, NoHydration } from "solid-js/web";
 import Copy from "lucide-solid/icons/copy";
 import Check from "lucide-solid/icons/check";
-import { highlight, type Language } from "~/lib/highlight";
+import { highlight, highlightSync, type Language } from "~/lib/highlight";
 import styles from "./CodeBlock.module.css";
 
 interface Props {
@@ -32,13 +32,22 @@ interface Props {
 
 export default function CodeBlock(props: Props): JSX.Element {
   let codeRef!: HTMLDivElement;
-
-  const [html] = createResource(
-    () => (props.lang ? { code: props.code, lang: props.lang } : undefined),
-    (src) => highlight(src.code, src.lang),
-  );
-
   const [copied, setCopied] = createSignal(false);
+
+  const html: Accessor<string | undefined> = import.meta.env.DEV
+    ? (() => {
+        const [highlighted] = createResource(
+          () =>
+            props.lang ? { code: props.code, lang: props.lang } : undefined,
+          (src) => highlight(src.code, src.lang),
+        );
+
+        return highlighted;
+      })()
+    : () =>
+        isServer && props.lang
+          ? highlightSync(props.code, props.lang)
+          : undefined;
 
   function copyCode() {
     const text = codeRef.querySelector("code")?.textContent ?? "";
@@ -63,26 +72,18 @@ export default function CodeBlock(props: Props): JSX.Element {
           </Show>
         </button>
         <NoHydration>
-          <Suspense
+          <Show
+            when={html()}
             fallback={
               <pre class={styles.codeBlock}>
                 <code>{props.code}</code>
               </pre>
             }
           >
-            <Show
-              when={html()}
-              fallback={
-                <pre class={styles.codeBlock}>
-                  <code>{props.code}</code>
-                </pre>
-              }
-            >
-              {(highlighted) => (
-                <div class={styles.highlighted} innerHTML={highlighted()} />
-              )}
-            </Show>
-          </Suspense>
+            {(highlighted) => (
+              <div class={styles.highlighted} innerHTML={highlighted()} />
+            )}
+          </Show>
         </NoHydration>
       </div>
     </div>

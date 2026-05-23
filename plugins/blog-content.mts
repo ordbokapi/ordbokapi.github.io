@@ -30,6 +30,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { renderD2 } from "./d2-render.mts";
 import rehypeShiki from "@shikijs/rehype";
+import { transformerStyleToClass } from "@shikijs/transformers";
 import rehypeStringify from "rehype-stringify";
 import { visit } from "unist-util-visit";
 import imageSize from "image-size";
@@ -61,6 +62,8 @@ function remarkPreserveMeta() {
 
 const virtualId = "virtual:blog-content";
 const resolvedId = "\0" + virtualId;
+
+const blogToClass = transformerStyleToClass();
 
 const authorsFile = resolve(import.meta.dirname, "../content/data/authors.yml");
 
@@ -269,11 +272,12 @@ async function processMarkdown(
     .use(rehypeFigure)
     .use(rehypeD2, { optimize: isBuild })
     .use(rehypeImageSize)
-    .use(rehypeSandbox, { apiUrl })
+    .use(rehypeSandbox, { apiUrl, toClass: blogToClass })
     .use(rehypeShiki, {
       themes: { light: "github-light", dark: "github-dark" },
       defaultColor: false,
       transformers: [
+        blogToClass,
         {
           pre(node) {
             delete node.properties.tabindex;
@@ -461,6 +465,7 @@ export default function blogContentPlugin(): Plugin {
       return `export const posts = ${JSON.stringify(outputPosts)};
 export const authors = ${JSON.stringify(authors)};
 export const categories = ${JSON.stringify(categories)};
+export const shikiCSS = ${JSON.stringify(blogToClass.getCSS())};
 `;
     },
   };

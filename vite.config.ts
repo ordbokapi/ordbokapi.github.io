@@ -47,11 +47,12 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ["solid-js", "solid-js/web"],
+    include: ["solid-js", "solid-js/web", "shiki/bundle/web"],
   },
   build: {
     target: "esnext",
     outDir: "dist",
+    minify: "oxc",
     watch: process.argv.includes("--watch")
       ? { include: ["src/**", "content/**"] }
       : null,

@@ -66,18 +66,10 @@
     :global(pre.shiki span) {
     color: var(--shiki-dark);
   }
-
-  :global(:root:not([data-theme="light"])) .highlighted :global(pre.shiki) {
-    background: var(--bg-code) !important;
-  }
 }
 
 :global(:root[data-theme="dark"]) .highlighted :global(pre.shiki span) {
   color: var(--shiki-dark);
-}
-
-:global(:root[data-theme="dark"]) .highlighted :global(pre.shiki) {
-  background: var(--bg-code) !important;
 }
 
 .label {

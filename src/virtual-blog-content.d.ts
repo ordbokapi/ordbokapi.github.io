@@ -57,4 +57,5 @@ declare module "virtual:blog-content" {
   export const posts: BlogPost[];
   export const authors: Record<string, Author>;
   export const categories: Category[];
+  export const shikiCSS: string;
 }

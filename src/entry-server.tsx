@@ -18,14 +18,19 @@
 
 import { renderToStringAsync, generateHydrationScript } from "solid-js/web";
 import App from "./App";
+import { initHighlighter, getHighlightCSS } from "~/lib/highlight";
+import { shikiCSS as blogShikiCSS } from "virtual:blog-content";
 
 export async function render(
   path: string,
-): Promise<{ html: string; hydrationScript: string }> {
+): Promise<{ html: string; hydrationScript: string; shikiCSS: string }> {
+  await initHighlighter();
+
   (globalThis as any).__SSR_PATH__ = path;
 
   const html = await renderToStringAsync(() => <App />);
   const hydrationScript = generateHydrationScript();
+  const shikiCSS = [blogShikiCSS, getHighlightCSS()].filter(Boolean).join("\n");
 
-  return { html, hydrationScript };
+  return { html, hydrationScript, shikiCSS };
 }

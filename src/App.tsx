@@ -28,7 +28,7 @@ import BlogCategory from "~/pages/BlogCategory";
 import BlogSubscribe from "~/pages/BlogSubscribe";
 import BlogVerify from "~/pages/BlogVerify";
 import BlogUnsubscribe from "~/pages/BlogUnsubscribe";
-import { posts, authors, categories } from "virtual:blog-content";
+import { posts, authors, categories, shikiCSS } from "virtual:blog-content";
 import "@fontsource/ibm-plex-sans/400.css";
 import "@fontsource/ibm-plex-sans/400-italic.css";
 import "@fontsource/ibm-plex-sans/600.css";
@@ -36,6 +36,14 @@ import "@fontsource/ibm-plex-sans/700.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "./App.css";
+
+if (import.meta.env.DEV && typeof document !== "undefined") {
+  const el = document.createElement("style");
+
+  el.id = "blog-shiki-css";
+  el.textContent = shikiCSS;
+  document.head.appendChild(el);
+}
 
 type Page =
   | "home"

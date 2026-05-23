@@ -17,12 +17,15 @@
 // along with Ordbok API. If not, see <https://www.gnu.org/licenses/>.
 
 import type { BundledLanguage, BundledTheme, HighlighterGeneric } from "shiki";
+import { transformerStyleToClass } from "@shikijs/transformers";
 
 export type Language = BundledLanguage;
+type Highlighter = HighlighterGeneric<BundledLanguage, BundledTheme>;
 
-let highlighterPromise: Promise<
-  HighlighterGeneric<BundledLanguage, BundledTheme>
-> | null = null;
+const toClass = transformerStyleToClass();
+
+let highlighterPromise: Promise<Highlighter> | null = null;
+let highlighterInstance: Highlighter | null = null;
 
 function getHighlighter() {
   if (highlighterPromise) {
@@ -33,14 +36,44 @@ function getHighlighter() {
     ? import("shiki")
     : import("shiki/bundle/web");
 
-  highlighterPromise = shiki.then(({ createHighlighter }) =>
-    createHighlighter({
+  highlighterPromise = shiki.then(async ({ createHighlighter }) => {
+    const highlighter = await createHighlighter({
       themes: ["github-light", "github-dark"],
-      langs: [],
-    }),
-  ) as Promise<HighlighterGeneric<BundledLanguage, BundledTheme>>;
+      langs: ["graphql", "json", "javascript"],
+    });
+    highlighterInstance = highlighter as Highlighter;
+    return highlighter;
+  }) as Promise<Highlighter>;
 
   return highlighterPromise;
+}
+
+export async function initHighlighter(): Promise<void> {
+  await getHighlighter();
+}
+
+export function getHighlightCSS(): string {
+  return toClass.getCSS();
+}
+
+export function highlightSync(code: string, lang: Language): string {
+  if (!highlighterInstance) {
+    return "";
+  }
+
+  return highlighterInstance.codeToHtml(code, {
+    lang,
+    themes: { light: "github-light", dark: "github-dark" },
+    defaultColor: false,
+    transformers: [
+      toClass,
+      {
+        pre(node) {
+          delete node.properties.tabindex;
+        },
+      },
+    ],
+  });
 }
 
 export async function highlight(code: string, lang: Language): Promise<string> {
@@ -51,11 +84,12 @@ export async function highlight(code: string, lang: Language): Promise<string> {
   const highlighter = await getHighlighter();
   await highlighter.loadLanguage(lang);
 
-  return highlighter.codeToHtml(code, {
+  const html = highlighter.codeToHtml(code, {
     lang,
     themes: { light: "github-light", dark: "github-dark" },
     defaultColor: false,
     transformers: [
+      toClass,
       {
         pre(node) {
           delete node.properties.tabindex;
@@ -63,4 +97,18 @@ export async function highlight(code: string, lang: Language): Promise<string> {
       },
     ],
   });
+
+  if (import.meta.env.DEV && !import.meta.env.SSR) {
+    let styleElem = document.getElementById("shiki-dev-css");
+
+    if (!styleElem) {
+      styleElem = document.createElement("style");
+      styleElem.id = "shiki-dev-css";
+      document.head.appendChild(styleElem);
+    }
+
+    styleElem.textContent = toClass.getCSS();
+  }
+
+  return html;
 }
