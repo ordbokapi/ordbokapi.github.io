@@ -111,15 +111,6 @@
   background: var(--bg-code);
   color: var(--text-muted);
   border: 1px solid var(--border-subtle);
-  cursor: pointer;
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast);
-}
-
-.categoryBadge:hover {
-  color: var(--primary);
-  border-color: var(--primary);
 }
 
 .summary {

@@ -54,10 +54,14 @@ export default function BlogPostPage(props: Props) {
             <span class={styles.draftBadge}>Utkast</span>
           </Show>
           <Show when={props.post.categories.length > 0}>
-            <div class={styles.categories}>
+            <div class={styles.categories} role="list" aria-label="Kategoriar">
               <For each={props.post.categories}>
                 {(cat) => (
-                  <a href={categoryPath(cat.slug)} class={styles.categoryBadge}>
+                  <a
+                    href={categoryPath(cat.slug)}
+                    class={styles.categoryBadge}
+                    role="listitem"
+                  >
                     {cat.name}
                   </a>
                 )}

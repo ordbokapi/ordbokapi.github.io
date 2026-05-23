@@ -18,7 +18,6 @@
 
 import { Show, For } from "solid-js";
 import type { BlogPost, Author } from "virtual:blog-content";
-import { categoryPath } from "~/categories";
 import styles from "./post-card.module.css";
 
 interface Props {
@@ -46,18 +45,7 @@ export default function PostCard(props: Props) {
           <Show when={props.post.categories.length > 0}>
             <div class={styles.categories}>
               <For each={props.post.categories}>
-                {(cat) => (
-                  <span
-                    class={styles.categoryBadge}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      window.location.href = categoryPath(cat.slug);
-                    }}
-                  >
-                    {cat.name}
-                  </span>
-                )}
+                {(cat) => <span class={styles.categoryBadge}>{cat.name}</span>}
               </For>
             </div>
           </Show>
@@ -83,7 +71,9 @@ export default function PostCard(props: Props) {
                   </span>
                 </Show>
               </span>
-              <span class={styles.separator}>|</span>
+              <span class={styles.separator} aria-hidden="true">
+                |
+              </span>
             </Show>
             <time dateTime={props.post.date}>{props.post.dateFormatted}</time>
           </div>
