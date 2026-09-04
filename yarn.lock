@@ -3506,18 +3506,18 @@ __metadata:
   linkType: hard
 
 "lucide-solid@npm:^1.16.0":
-  version: 1.16.0
-  resolution: "lucide-solid@npm:1.16.0"
+  version: 1.40.0
+  resolution: "lucide-solid@npm:1.40.0"
   peerDependencies:
     solid-js: ^1.4.7
-  checksum: 10c0/ef53550b22ca711ff304461d0926cfcddbffec6fac592bf223f12be14c4623782b9a3507a65178216442519f5fd5b0b22957e6b957c010b02f8c0a69d3af7d77
+  checksum: 10c0/26865d34f08226cc9b896ccc2041760c30cf742e6f3a62f3080fdcbb3057aedf0785a0aa8aa3db914e060f91c8e57f78e6896d67b00a4e64e74862aca6a1ec27
   languageName: node
   linkType: hard
 
 "lucide-static@npm:^1.16.0":
-  version: 1.16.0
-  resolution: "lucide-static@npm:1.16.0"
-  checksum: 10c0/ac51da69406706ea7dbd8af3741875e29fb1ae9682d5ee9de610bdf256560ca87671f425d283f6b58cbd66143065006ca43ba84e8816753e80a2e069de88f867
+  version: 1.40.0
+  resolution: "lucide-static@npm:1.40.0"
+  checksum: 10c0/e125bc29ed7712f4dceaf5f5ebbfc81f4a68678d86ac02981db37d589783e08a3d5d57fd99a35c90868edcbc1b2c84ffbcea2bf7f01d898546048435994768a6
   languageName: node
   linkType: hard
 
